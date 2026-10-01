@@ -55,10 +55,10 @@ export default async function Dashboard() {
         <Card title="Not yet ranked" subtitle="Processing, failed or unreadable CVs. Missing evidence is never turned into a low score.">
           <ul className="divide-y divide-line">
             {[...attention, ...unranked].map((r) => (
-              <li key={r.id} className="flex flex-wrap items-center justify-between gap-3 py-2.5 text-sm">
+              <li key={r.id} className="relative flex flex-wrap items-center justify-between gap-3 py-2.5 text-sm hover:bg-surface-2/50">
                 <div className="flex min-w-0 items-center gap-2">
                   <Badge>{r.applied_role}</Badge>
-                  <Link href={`/candidates/${r.id}`} className="truncate hover:text-accent-strong">{r.name ?? r.original_filename}</Link>
+                  <Link href={`/candidates/${r.id}`} className="truncate after:absolute after:inset-0 after:content-[''] hover:text-accent-strong">{r.name ?? r.original_filename}</Link>
                   {r.is_synthetic && <Badge tone="cyan">Synthetic</Badge>}
                 </div>
                 <div className="flex items-center gap-2">
@@ -125,12 +125,13 @@ function RankRow({ r, role }: { r: Row; role: Role }) {
   const oev = r.evals[other];
   const sent = r.sends.some((s) => s.status === "sent");
   return (
-    <li className="group border-b border-line/70 px-5 py-3 transition-colors last:border-b-0 hover:bg-surface-2/70">
+    <li className="group relative cursor-pointer border-b border-line/70 px-5 py-3 transition-colors last:border-b-0 hover:bg-surface-2/70">
       <div className="flex items-center gap-4">
         <div className={`w-7 text-center font-mono text-sm tabular-nums ${r.in_top5 ? "text-accent-strong" : "text-faint"}`}>{r.applied_rank}</div>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2">
-            <Link href={`/candidates/${r.id}`} className="truncate text-sm font-medium hover:text-accent-strong">
+            {/* Stretched link: the whole row opens the candidate. */}
+            <Link href={`/candidates/${r.id}`} className="truncate text-sm font-medium after:absolute after:inset-0 after:content-[''] group-hover:text-accent-strong">
               {r.name ?? r.original_filename}
             </Link>
             {r.is_synthetic && <Badge tone="cyan">Synthetic</Badge>}
@@ -150,7 +151,7 @@ function RankRow({ r, role }: { r: Row; role: Role }) {
           {r.in_top5 && r.brief && <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted">{r.brief[0]}</p>}
         </div>
         {ev && <ScoreCoverage compact score={ev.score === null ? null : Number(ev.score)} coverage={Number(ev.coverage_pct)} interpretable={Boolean(ev.recommendation_reasons?.interpretable)} />}
-        <Link href={`/candidates/${r.id}/decision`} className="hidden rounded-md border border-line-strong px-2 py-1 text-xs text-muted opacity-0 transition-opacity hover:border-accent hover:text-text group-hover:opacity-100 md:block">
+        <Link href={`/candidates/${r.id}/decision`} className="relative z-10 shrink-0 rounded-md border border-line-strong px-2 py-1 text-xs text-muted transition-colors hover:border-accent hover:text-text">
           Decide
         </Link>
       </div>
