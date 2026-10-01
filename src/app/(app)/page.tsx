@@ -3,6 +3,7 @@ import { requireFounderPage } from "@/lib/auth";
 import { dashboardData } from "@/lib/data";
 import { ROLE_TITLES, type Role } from "@/lib/rubric/types";
 import type { RubricValidation } from "@/lib/rubric/types";
+import { ReassignRolesButton } from "@/components/reassign-roles-button";
 import { Badge, ButtonLink, Card, DECISION_LABEL, DECISION_TONE, EmptyState, Notice, ScoreCoverage, Stat, StatusBadge, TierBadge, recTone } from "@/components/ui";
 
 export const dynamic = "force-dynamic";
@@ -19,9 +20,10 @@ export default async function Dashboard() {
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <h1 className="text-2xl font-semibold tracking-tight">Shortlist command</h1>
-          <p className="mt-1 text-sm text-muted">Ranked within each applied role. Review the top five, glance below the line once, then decide.</p>
+          <p className="mt-1 text-sm text-muted">Each CV is scored for both roles and ranked in the one it fits better. Review the top five, glance below the line once, then decide.</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <ReassignRolesButton />
           <ButtonLink href="/upload" variant="primary">Upload CVs</ButtonLink>
           <ButtonLink href="/rubric" variant="outline">Rubric</ButtonLink>
         </div>
@@ -52,12 +54,12 @@ export default async function Dashboard() {
       </div>
 
       {(attention.length > 0 || unranked.length > 0) && (
-        <Card title="Not yet ranked" subtitle="Processing, failed or unreadable CVs. Missing evidence is never turned into a low score.">
+        <Card title="Not yet ranked" subtitle="Processing, failed or unreadable CVs, and CVs with no scorable evidence for either role (choose a role on their page). Missing evidence is never turned into a low score.">
           <ul className="divide-y divide-line">
             {[...attention, ...unranked].map((r) => (
               <li key={r.id} className="relative flex flex-wrap items-center justify-between gap-3 py-2.5 text-sm hover:bg-surface-2/50">
                 <div className="flex min-w-0 items-center gap-2">
-                  <Badge>{r.applied_role}</Badge>
+                  {r.applied_role ? <Badge>{r.applied_role}</Badge> : r.status === "scored" ? <Badge tone="warn">Needs a role</Badge> : <Badge>Role after scoring</Badge>}
                   <Link href={`/candidates/${r.id}`} className="truncate after:absolute after:inset-0 after:content-[''] hover:text-accent-strong">{r.name ?? r.original_filename}</Link>
                   {r.is_synthetic && <Badge tone="cyan">Synthetic</Badge>}
                 </div>
@@ -136,6 +138,11 @@ function RankRow({ r, role }: { r: Row; role: Role }) {
             </Link>
             {r.is_synthetic && <Badge tone="cyan">Synthetic</Badge>}
             {r.possible_duplicate_of && <Badge tone="warn" title="Same email as another application">Possible duplicate</Badge>}
+            {r.role_source === "founder" ? (
+              <Badge tone="accent" title="You placed this candidate in this role">Role set by you</Badge>
+            ) : r.role_fit?.confidence === "low" || r.role_fit?.closeCall ? (
+              <Badge tone="warn" title={r.role_fit.reason}>Fit: low confidence</Badge>
+            ) : null}
             <TierBadge tier={r.rank_tier} />
           </div>
           <div className="mt-1 flex flex-wrap items-center gap-1.5">

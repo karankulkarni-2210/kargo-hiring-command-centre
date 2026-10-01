@@ -11,7 +11,7 @@ export default async function UploadPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Upload CVs</h1>
-        <p className="mt-1 text-sm text-muted">PDF, DOCX or TXT, up to 10 MB each. Every file needs an explicit applied role. Uploading never contacts anyone.</p>
+        <p className="mt-1 text-sm text-muted">PDF, DOCX or TXT, up to 10 MB each. The role (PM or SPM) is assigned automatically after scoring. Uploading never contacts anyone.</p>
       </div>
       {!rubric && <Notice tone="danger" title="No active rubric">CVs will be extracted but cannot be scored until a rubric is active.</Notice>}
       <Uploader />

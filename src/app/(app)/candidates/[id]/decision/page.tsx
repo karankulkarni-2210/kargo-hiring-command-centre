@@ -14,7 +14,18 @@ export default async function DecisionPage({ params }: { params: Promise<{ id: s
   const { supabase } = await requireFounderPage();
   const d = await candidateDetail(supabase, id);
   if (!d) notFound();
-  const { cand, ident } = d;
+  const { cand: c, ident } = d;
+  if (!c.applied_role) {
+    return (
+      <div className="space-y-6">
+        <Link href={`/candidates/${c.id}`} className="text-xs text-faint hover:text-text">← Candidate</Link>
+        <Notice title="No role assigned yet">
+          This CV has no scorable evidence for either role, so it was not placed automatically. Choose PM or SPM on the candidate page first; decisions and emails are tied to a role.
+        </Notice>
+      </div>
+    );
+  }
+  const cand = { ...c, applied_role: c.applied_role };
   const ev = d.evalByRole[cand.applied_role];
   const decision = d.decisions[0] ?? null;
   const config = readEmailConfig();
@@ -58,7 +69,7 @@ export default async function DecisionPage({ params }: { params: Promise<{ id: s
         <Link href={`/candidates/${cand.id}`} className="text-xs text-faint hover:text-text">← Candidate</Link>
         <h1 className="mt-1 text-2xl font-semibold tracking-tight">Decision & email review</h1>
         <p className="mt-1 text-sm text-muted">
-          {ident?.full_name ?? cand.original_filename} · applied for {ROLE_TITLES[cand.applied_role]} ({cand.applied_role})
+          {ident?.full_name ?? cand.original_filename} · ranked in {ROLE_TITLES[cand.applied_role]} ({cand.applied_role}, {cand.role_source === "founder" ? "set by you" : "automatic fit"})
         </p>
       </div>
 

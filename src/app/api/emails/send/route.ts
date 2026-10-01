@@ -34,6 +34,7 @@ export async function POST(req: Request) {
       supabase.from("email_sends").select("mode, status, kind, draft_id, draft_version").eq("candidate_id", b.candidateId),
     ]);
     if (!cand) throw new HttpError(404, "Candidate not found");
+    if (!cand.applied_role) throw new HttpError(409, "Candidate has no role assigned.");
     const decision = decisions?.[0] ? { id: decisions[0].id as string, decision: decisions[0].decision as Decision } : null;
 
     const check = checkSendEligibility({

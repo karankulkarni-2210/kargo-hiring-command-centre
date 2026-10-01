@@ -18,7 +18,6 @@ const Body = z.object({
         name: z.string().min(1).max(240),
         size: z.number().int().positive(),
         sha256: z.string().regex(/^[a-f0-9]{64}$/),
-        role: z.enum(["PM", "SPM"]),
         synthetic: z.boolean().optional(),
       }),
     )
@@ -27,13 +26,14 @@ const Body = z.object({
 });
 
 /**
- * Step 1 of upload: register each file (explicit applied role required), reject duplicates,
+ * Step 1 of upload: register each file, reject duplicates. No role is chosen here: after the CV is
+ * scored against both rubrics the pipeline assigns it to the better-fitting role (founder can override).
  * and hand back a short-lived signed upload URL for the private bucket. Nothing is processed yet.
  */
 export async function POST(req: Request) {
   return withFounder(async ({ supabase, email }) => {
     const parsed = Body.safeParse(await req.json().catch(() => null));
-    if (!parsed.success) throw new HttpError(400, "Each file needs a name, size, SHA-256 and an applied role (PM or SPM).");
+    if (!parsed.success) throw new HttpError(400, "Each file needs a name, size and SHA-256.");
     const out = [];
     for (const f of parsed.data.files) {
       const ext = f.name.split(".").pop()?.toLowerCase() ?? "";
@@ -72,7 +72,7 @@ export async function POST(req: Request) {
       const path = `${id}/${safe}`;
       const { error } = await supabase.from("candidates").insert({
         id,
-        applied_role: f.role,
+        applied_role: null,
         status: "awaiting_upload",
         original_filename: f.name,
         file_path: path,

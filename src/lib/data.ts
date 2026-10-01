@@ -25,7 +25,10 @@ export type EvaluationRow = {
 
 export type CandidateRow = {
   id: string;
-  applied_role: Role;
+  /** Role the candidate is ranked in: assigned automatically from both scores unless the founder set it. Null until assigned. */
+  applied_role: Role | null;
+  role_source: "auto" | "founder";
+  role_fit: RoleFitStored | null;
   status: string;
   original_filename: string;
   file_mime: string | null;
@@ -38,6 +41,18 @@ export type CandidateRow = {
   duplicate_of: string | null;
   possible_duplicate_of: string | null;
   created_at: string;
+};
+
+export type RoleFitStored = {
+  role: Role | null;
+  basis: "score" | "coverage" | "only_scorable" | "none";
+  confidence: "comparable" | "low" | "none";
+  closeCall: boolean;
+  reason: string;
+  pm: { score: number | null; coveragePct: number } | null;
+  spm: { score: number | null; coveragePct: number } | null;
+  rubric_version_id?: string;
+  computed_at?: string;
 };
 
 export type DecisionRow = { id: string; candidate_id: string; decision: "advance" | "hold" | "decline"; rationale: string; decided_by_email: string; decided_at: string };
@@ -53,7 +68,7 @@ export async function latestDecisions(sb: SupabaseClient, ids?: string[]): Promi
 
 export async function dashboardData(sb: SupabaseClient) {
   const [{ data: cands }, { data: active }] = await Promise.all([
-    sb.from("candidates").select("id, applied_role, status, original_filename, is_synthetic, last_error, applied_rank, rank_tier, in_top5, created_at, duplicate_of, possible_duplicate_of, file_mime, file_size").order("created_at"),
+    sb.from("candidates").select("id, applied_role, role_source, role_fit, status, original_filename, is_synthetic, last_error, applied_rank, rank_tier, in_top5, created_at, duplicate_of, possible_duplicate_of, file_mime, file_size").order("created_at"),
     sb.from("rubric_versions").select("id, version_label, declared_status, validation").eq("is_active", true).maybeSingle(),
   ]);
   const candidates = (cands ?? []) as CandidateRow[];
@@ -87,7 +102,7 @@ export async function dashboardData(sb: SupabaseClient) {
   const live = rows.filter((r) => r.status !== "duplicate");
   const counts = {
     total: live.length,
-    byRole: { PM: live.filter((r) => r.applied_role === "PM").length, SPM: live.filter((r) => r.applied_role === "SPM").length },
+    byRole: { PM: live.filter((r) => r.applied_role === "PM").length, SPM: live.filter((r) => r.applied_role === "SPM").length, none: live.filter((r) => !r.applied_role).length },
     scored: live.filter((r) => r.status === "scored").length,
     processing: live.filter((r) => ["queued", "extracting", "extracted", "scoring"].includes(r.status)).length,
     attention: live.filter((r) => ["needs_attention", "failed"].includes(r.status)).length,

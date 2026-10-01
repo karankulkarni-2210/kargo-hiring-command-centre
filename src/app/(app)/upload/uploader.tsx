@@ -4,11 +4,9 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge, buttonClass, cx, StatusBadge } from "@/components/ui";
 
-type Role = "PM" | "SPM";
 type Item = {
   key: string;
   file: File;
-  role: Role | "";
   synthetic: boolean;
   phase: "ready" | "hashing" | "registering" | "uploading" | "processing" | "done" | "error" | "duplicate";
   progress: number;
@@ -54,7 +52,6 @@ function putWithProgress(url: string, file: File, apiKey: string, onProgress: (p
 
 export function Uploader() {
   const [items, setItems] = useState<Item[]>([]);
-  const [batchRole, setBatchRole] = useState<Role | "">("");
   const [drag, setDrag] = useState(false);
   const [running, setRunning] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -68,7 +65,6 @@ export function Uploader() {
       next.push({
         key: `${f.name}-${f.size}-${f.lastModified}-${Math.random().toString(36).slice(2, 7)}`,
         file: f,
-        role: batchRole,
         synthetic: /synthetic/i.test(f.name),
         phase: ok ? "ready" : "error",
         progress: 0,
@@ -78,21 +74,15 @@ export function Uploader() {
     setItems((xs) => [...xs, ...next]);
   };
 
-  const applyBatchRole = (r: Role | "") => {
-    setBatchRole(r);
-    if (r) setItems((xs) => xs.map((x) => (x.phase === "ready" && !x.role ? { ...x, role: r } : x)));
-  };
-
   const processOne = useCallback(async (it: Item) => {
     try {
-      if (!it.role) throw new Error("Choose an applied role");
       patch(it.key, { phase: "hashing", error: undefined, progress: 0 });
       const sha = it.sha ?? (await sha256(it.file));
       patch(it.key, { sha, phase: "registering" });
       const reg = await fetch("/api/uploads", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ files: [{ name: it.file.name, size: it.file.size, sha256: sha, role: it.role, synthetic: it.synthetic }] }),
+        body: JSON.stringify({ files: [{ name: it.file.name, size: it.file.size, sha256: sha, synthetic: it.synthetic }] }),
       });
       const regBody = await reg.json();
       if (!reg.ok) throw new Error(regBody.error ?? "Registration failed");
@@ -115,7 +105,7 @@ export function Uploader() {
 
   const start = async () => {
     setRunning(true);
-    const queue = items.filter((x) => x.phase === "ready" && x.role);
+    const queue = items.filter((x) => x.phase === "ready");
     const workers = Array.from({ length: 3 }, async () => {
       while (queue.length) await processOne(queue.shift()!);
     });
@@ -158,20 +148,11 @@ export function Uploader() {
   };
 
   const readyCount = items.filter((x) => x.phase === "ready").length;
-  const missingRole = items.some((x) => x.phase === "ready" && !x.role);
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-end gap-4 rounded-xl border border-line bg-surface/80 p-4">
-        <label className="block">
-          <span className="text-xs font-medium text-muted">Applied role for this batch <span className="text-danger">*</span></span>
-          <select value={batchRole} onChange={(e) => applyBatchRole(e.target.value as Role | "")} className="focus-ring mt-1.5 block w-64 rounded-lg border border-line-strong bg-surface-2 px-3 py-2 text-sm">
-            <option value="">Choose role…</option>
-            <option value="PM">Product Manager (PM)</option>
-            <option value="SPM">Senior Product Manager (SPM)</option>
-          </select>
-        </label>
-        <p className="max-w-md pb-1 text-xs text-muted">The role the candidate applied for. You can override it per file. Every candidate is still scored against both rubrics; ranking happens within the applied role.</p>
+      <div className="rounded-xl border border-line bg-surface/80 p-4 text-xs leading-relaxed text-muted">
+        <span className="font-medium text-text">No role to choose.</span> Every CV is scored against both the PM and SPM rubrics, then placed in the role it fits better: by score when coverage is comparable, otherwise by which role the CV has more evidence for. You can move anyone from their candidate page.
       </div>
 
       <div
@@ -207,7 +188,7 @@ export function Uploader() {
             </div>
             <div className="flex items-center gap-2">
               <button className={buttonClass("ghost")} onClick={() => setItems((xs) => xs.filter((x) => !["done", "duplicate"].includes(x.phase)))}>Clear finished</button>
-              <button className={buttonClass("primary")} disabled={running || readyCount === 0 || missingRole} onClick={start} title={missingRole ? "Every file needs a role" : undefined}>
+              <button className={buttonClass("primary")} disabled={running || readyCount === 0} onClick={start}>
                 {running ? "Uploading…" : `Upload ${readyCount || ""}`}
               </button>
             </div>
@@ -226,19 +207,12 @@ export function Uploader() {
                   </div>
                   {it.phase === "ready" ? (
                     <>
-                      <select value={it.role} onChange={(e) => patch(it.key, { role: e.target.value as Role | "" })} className={cx("focus-ring rounded-md border bg-surface-2 px-2 py-1 text-xs", it.role ? "border-line-strong" : "border-danger/60")}>
-                        <option value="">Role…</option>
-                        <option value="PM">PM</option>
-                        <option value="SPM">SPM</option>
-                      </select>
                       <label className="flex items-center gap-1.5 text-xs text-muted">
                         <input type="checkbox" checked={it.synthetic} onChange={(e) => patch(it.key, { synthetic: e.target.checked })} /> synthetic
                       </label>
                       <button className="text-xs text-faint hover:text-danger" onClick={() => setItems((xs) => xs.filter((x) => x.key !== it.key))}>Remove</button>
                     </>
-                  ) : (
-                    <Badge>{it.role}</Badge>
-                  )}
+                  ) : null}
                   <PhaseView it={it} onRetry={() => retry(it)} />
                 </div>
                 {(it.phase === "uploading" || it.phase === "hashing" || it.phase === "registering") && (

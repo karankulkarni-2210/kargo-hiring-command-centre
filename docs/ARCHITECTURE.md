@@ -17,7 +17,8 @@ Upload (browser) ──signed URL──▶ Private Storage bucket "cvs" (founder
               ─▶ redacted evidence → candidate_profiles  (+ residual-identifier gate)
   2. score ×2 ─ PM rubric and SPM rubric, REDACTED text only
               ─▶ zod validation ─▶ rubric rule engine ─▶ weighted total in code
-  3. rank ──── within applied role, comparability bands (coverage gap ≤ 15 pp)
+  2b. role fit  assign PM or SPM automatically from both evaluations (founder can override)
+  3. rank ──── within the assigned role, comparability bands (coverage gap ≤ 15 pp)
   4. brief ─── top five per role (3 sentences + 3 targeted questions)
   5. draft ─── every candidate: invite (top 5) / rejection (others), placeholders only
                                      │
@@ -36,7 +37,7 @@ Founder ── Decision (Advance / Hold / Decline + rationale, append-only)
 | Missing evidence ≠ failure | Rule engine (`src/lib/scoring/engine.ts`): no verified quote → NE; interview-only (PM-3, SPM-3) → NE at CV screen; a 1–2 needs a verified quote matching the low anchor; quotes are checked verbatim against the CV text, so fabricated evidence is discarded; CV-PARTIAL confidence is capped at Medium and High is never assigned at CV stage. Every override is logged and shown. |
 | Coverage beside score | `Score XX.X/100 at YY% coverage (stage: CV screen)` is rendered everywhere, with a coverage bar marked at the 70% interpretation minimum. |
 | Ranking fairness | Scores are ordered only among candidates whose coverage is within 15 pp and above the 70% minimum. Below that, candidates are ranked by coverage and labelled "not interpretable". No automatic accept or reject thresholds. |
-| Both roles | Every CV is scored against PM **and** SPM. It is ranked only within the role applied for, and the cross-role score is shown on the candidate page. |
+| Both roles, automatic fit | Every CV is scored against PM **and** SPM, then **assigned automatically** to one role (`suggestRole` in `engine.ts`). Scores are compared only when both roles have ≥70% coverage and are within 15 pp (§6.3), and a gap under 5 points is a "close call" decided by evidence. Otherwise the role with more evidenced rubric weight wins and the fit is labelled low-confidence. If neither role is scorable, no role is assigned and the founder chooses. Years of experience are never used (C3). The founder can move anyone or hand them back to automatic. A role is locked once a decision is recorded. Every change is audited (`role_auto_assigned` / `role_overridden`) and re-ranks both roles. Unsent AI drafts are regenerated for the new role, and nothing is sent. |
 | Rubric replaceable | Import a new `.txt` or `.json` (or AI-assisted, verbatim-verified) and it is stored inactive. Activate it, then re-score. Each evaluation stores `rubric_version_id`. |
 | Vercel-friendly processing | A Postgres job queue with `FOR UPDATE SKIP LOCKED`, dedupe keys, retries with backoff, `retryDelay`-aware rate-limit deferral and stale-job recovery. The browser drives short ticks; a daily Vercel Cron drains the queue without a browser if configured. |
 | Malformed AI output | JSON-schema-constrained output, zod validation, one repair round-trip, then the job fails visibly with a Retry button. |

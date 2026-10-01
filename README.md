@@ -14,8 +14,8 @@ Stack: Next.js 16 (App Router) · TypeScript · Tailwind CSS 4 · Supabase (Post
 | Page | What it does |
 |---|---|
 | **Dashboard** `/` | Real counts (applications, scored, in pipeline, needs attention, pending decisions, emails sent), live processing status, and separate PM and SPM ranked lists with a "below the line" divider after the top five |
-| **Upload** `/upload` | Multiple PDF / DOCX / TXT files, a required applied role per file, per-file progress, errors, duplicate detection and retry |
-| **Candidate** `/candidates/[id]` | Scores for **both** PM and SPM, criterion-level evidence with verified quotes, coverage, NE reasons, essential requirements, the 3-sentence brief, targeted interview questions, data-path/privacy panel and processing log |
+| **Upload** `/upload` | Multiple PDF / DOCX / TXT files, per-file progress, errors, duplicate detection and retry. No role to choose: it is assigned automatically after scoring |
+| **Candidate** `/candidates/[id]` | **Role fit** (which role the CV is ranked in, why, and Move to PM / SPM / Back to automatic), scores for **both** PM and SPM, criterion-level evidence with verified quotes, coverage, NE reasons, essential requirements, the 3-sentence brief, targeted interview questions, data-path/privacy panel and processing log |
 | **Decision & email** `/candidates/[id]/decision` | AI recommendation (kept separate), Advance / Hold / Decline with rationale, editable invite/rejection drafts, rendered preview with the actual destination, explicit Confirm to Send, send history with provider IDs |
 | **Rubric** `/rubric` | Criteria, weights, anchors, source support, version, PROVISIONAL status, assignment-fit flags, the original source file, import/activate/re-score/export |
 | **Settings** `/settings` | Integration readiness (live DB query, Gemini check, Resend state), email mode, test-recipient configuration, data-path explanation. No secrets are shown |

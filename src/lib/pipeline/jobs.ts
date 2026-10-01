@@ -4,7 +4,7 @@ import { aiBrief, aiDraft, aiExtract, aiScore } from "../ai/tasks";
 import { GeminiConfigError, GeminiError, GeminiMalformedError, GeminiRateLimitError } from "../ai/gemini";
 import { assertRedacted, cleanPersonName, detectInjection, firstNameOf, preRedactContacts, redactIdentity, residualIdentifierCheck, samePerson } from "../redaction";
 import { loadActiveRubric, sha256Hex, type ActiveRubric } from "../rubric/store";
-import type { Role } from "../rubric/types";
+import { ROLES, type Role } from "../rubric/types";
 import {
   computeScore,
   enforceCriterionRules,
@@ -13,8 +13,10 @@ import {
   quoteAppearsIn,
   rankWithinRole,
   recommend,
+  suggestRole,
   type CriterionResult,
   type EssentialResult,
+  type RoleFit,
 } from "../scoring/engine";
 import { validateTemplate } from "../email/core";
 import { detectKind, docxText, meaningfulChars, pdfText, txtText } from "./text";
@@ -270,13 +272,72 @@ async function handleScore(sb: SupabaseClient, job: Job) {
 
   const { data: evs } = await sb.from("evaluations").select("role").eq("candidate_id", id).eq("is_current", true).eq("rubric_version_id", rubric.id);
   const roles = new Set((evs ?? []).map((e) => e.role));
-  if (roles.has("PM") && roles.has("SPM")) await setCandidate(sb, id, { status: "scored", last_error: null });
-  if (role === cand.applied_role) await enqueue(sb, "rank", null, role, `rank:${role}`);
+  if (roles.has("PM") && roles.has("SPM")) {
+    await setCandidate(sb, id, { status: "scored", last_error: null });
+    // Both rubrics done: decide which role this CV is ranked in (automatic unless the founder set it).
+    await assignRole(sb, id, rubric, { actor: "system" });
+  }
   return { display: summary.display, recommendation: rec.primary, overrides: log.length };
 }
 
 // ---------------------------------------------------------------------------
-// rank (within applied role) → schedules briefs (top 5) and drafts (everyone)
+// Role assignment (automatic fit, founder override). Never decides or contacts anyone.
+// ---------------------------------------------------------------------------
+export type AssignOutcome = { role: Role | null; previous: Role | null; changed: boolean; locked: boolean; source: "auto" | "founder"; fit: RoleFit };
+
+export async function assignRole(
+  sb: SupabaseClient,
+  id: string,
+  rubric: ActiveRubric,
+  opts: { actor: string; override?: Role | "auto" },
+): Promise<AssignOutcome> {
+  const [{ data: cand, error }, { data: evs }, { count: decisions }] = await Promise.all([
+    sb.from("candidates").select("id, applied_role, role_source").eq("id", id).single(),
+    sb.from("evaluations").select("role, score, coverage_pct").eq("candidate_id", id).eq("is_current", true).eq("rubric_version_id", rubric.id),
+    sb.from("decisions").select("id", { count: "exact", head: true }).eq("candidate_id", id),
+  ]);
+  if (error || !cand) throw new PermanentJobError("Candidate not found");
+  const pick = (r: Role) => {
+    const e = (evs ?? []).find((x) => x.role === r);
+    return e ? { score: e.score === null ? null : Number(e.score), coveragePct: Number(e.coverage_pct) } : null;
+  };
+  const fit = suggestRole(pick("PM"), pick("SPM"), rubric.parsed.rules);
+  // Once a decision is recorded, the role that decision was made in is fixed. (Every send requires a
+  // recorded decision, and decisions are append-only, so this also covers anyone already emailed.)
+  const locked = (decisions ?? 0) > 0;
+  const previous = (cand.applied_role as Role | null) ?? null;
+  let source = cand.role_source as "auto" | "founder";
+  let role = previous;
+  if (!locked) {
+    if (opts.override === "auto") source = "auto";
+    else if (opts.override) {
+      source = "founder";
+      role = opts.override;
+    }
+    if (source === "auto") role = fit.role;
+  }
+  const changed = role !== previous;
+  const now = new Date().toISOString();
+  const patch: Record<string, unknown> = { role_fit: { ...fit, rubric_version_id: rubric.id, computed_at: now }, role_source: source };
+  if (changed) Object.assign(patch, { applied_role: role, role_assigned_at: now, in_top5: false, applied_rank: null, rank_tier: null, ranked_at: null });
+  await setCandidate(sb, id, patch);
+  if (changed) {
+    // AI drafts were written for the previous role; the rank step regenerates them. Founder-edited drafts are kept.
+    await sb.from("email_drafts").update({ is_current: false }).eq("candidate_id", id).eq("is_current", true).eq("origin", "ai");
+    await audit(sb, opts.actor, opts.override && opts.override !== "auto" ? "role_overridden" : "role_auto_assigned", "candidates", id, {
+      from: previous,
+      to: role,
+      basis: fit.basis,
+      confidence: fit.confidence,
+      reason: fit.reason,
+    });
+  }
+  for (const r of ROLES) if (r === previous || r === role) await enqueue(sb, "rank", null, r, `rank:${r}`);
+  return { role, previous, changed, locked, source, fit };
+}
+
+// ---------------------------------------------------------------------------
+// rank (within assigned role) → schedules briefs (top 5) and drafts (everyone)
 // ---------------------------------------------------------------------------
 async function handleRank(sb: SupabaseClient, job: Job) {
   const role = job.role!;
@@ -417,6 +478,7 @@ async function handleDraft(sb: SupabaseClient, job: Job) {
     sb.from("candidate_identities").select("full_name, email, phone").eq("candidate_id", id).maybeSingle(),
   ]);
   if (!cand) throw new PermanentJobError("Candidate not found");
+  if (!cand.applied_role) return { skipped: "no role assigned" };
   if (existing && !regenerate) return { skipped: "draft exists" };
   const idCheck = { fullName: ident?.full_name ?? null, emails: ident?.email ? [ident.email] : [], phones: ident?.phone ? [ident.phone] : [] };
   const hint = ev?.strongest_evidence && !residualIdentifierCheck(ev.strongest_evidence, idCheck).length ? ev.strongest_evidence : null;

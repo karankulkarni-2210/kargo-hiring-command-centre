@@ -5,6 +5,7 @@
  * Weighted totals are always computed here, never taken from a model.
  */
 import type { Criterion, EssentialRequirement, RubricRules } from "../rubric/types";
+import type { Role } from "../rubric/types";
 
 export type Confidence = "Low" | "Medium" | "High";
 const CONF_ORDER: Confidence[] = ["Low", "Medium", "High"];
@@ -325,4 +326,68 @@ export function rankWithinRole(rows: RankInput[], rules: RubricRules, topN = 5):
     r.inTop5 = i < topN && r.tier !== "not_scorable";
   });
   return out;
+}
+
+// ---------------------------------------------------------------------------
+// Role fit: which of PM / SPM this CV is ranked in. Automatic; the founder can override.
+// Follows the rubric's comparison limits (§6.3): scores are compared only when both roles are at
+// or above the coverage minimum AND their coverage differs by no more than the comparability gap.
+// Otherwise the role with more evidenced rubric weight (coverage) wins, and the fit is marked
+// low-confidence. Experience years are never used (C3: age-proxy risk).
+// ---------------------------------------------------------------------------
+export type FitInput = { score: number | null; coveragePct: number } | null;
+export type RoleFit = {
+  role: Role | null;
+  basis: "score" | "coverage" | "only_scorable" | "none";
+  confidence: "comparable" | "low" | "none";
+  closeCall: boolean;
+  reason: string;
+  pm: { score: number | null; coveragePct: number } | null;
+  spm: { score: number | null; coveragePct: number } | null;
+};
+
+/** Score differences below this are within anchoring noise (§6.3: "a few points"). */
+export const FIT_NOISE_POINTS = 5;
+
+export function suggestRole(pm: FitInput, spm: FitInput, rules: Pick<RubricRules, "coverageMinimumPct" | "maxComparableCoverageGapPct">): RoleFit {
+  const snap = (x: FitInput) => (x ? { score: x.score, coveragePct: x.coveragePct } : null);
+  const base = { pm: snap(pm), spm: snap(spm) };
+  const pmOk = pm?.score !== null && pm !== null;
+  const spmOk = spm?.score !== null && spm !== null;
+  const fmt = (r: Role, x: NonNullable<FitInput>) => `${r} ${x.score === null ? "not scorable" : x.score.toFixed(1)} at ${x.coveragePct}% coverage`;
+
+  if (!pmOk && !spmOk)
+    return { ...base, role: null, basis: "none", confidence: "none", closeCall: false, reason: "No scorable evidence for either role. Choose a role manually." };
+  if (pmOk !== spmOk) {
+    const role: Role = pmOk ? "PM" : "SPM";
+    const other: Role = pmOk ? "SPM" : "PM";
+    return { ...base, role, basis: "only_scorable", confidence: "low", closeCall: false, reason: `Only ${role} has scorable evidence (${fmt(role, (pmOk ? pm : spm)!)}); ${other} is not scorable.` };
+  }
+  const a = pm!;
+  const b = spm!;
+  const comparable =
+    a.coveragePct >= rules.coverageMinimumPct && b.coveragePct >= rules.coverageMinimumPct && Math.abs(a.coveragePct - b.coveragePct) <= rules.maxComparableCoverageGapPct;
+  const both = `${fmt("PM", a)} vs ${fmt("SPM", b)}`;
+  if (comparable) {
+    const diff = (a.score as number) - (b.score as number);
+    if (Math.abs(diff) < FIT_NOISE_POINTS) {
+      const role: Role = a.coveragePct === b.coveragePct ? (diff >= 0 ? "PM" : "SPM") : a.coveragePct > b.coveragePct ? "PM" : "SPM";
+      return { ...base, role, basis: "coverage", confidence: "comparable", closeCall: true, reason: `Close call: scores are within ${FIT_NOISE_POINTS} points (${both}), so the role with more evidence was chosen. Worth a human look.` };
+    }
+    const role: Role = diff > 0 ? "PM" : "SPM";
+    return { ...base, role, basis: "score", confidence: "comparable", closeCall: false, reason: `Higher score with comparable coverage (${both}).` };
+  }
+  if (a.coveragePct === b.coveragePct) {
+    const role: Role = (a.score as number) >= (b.score as number) ? "PM" : "SPM";
+    return { ...base, role, basis: "score", confidence: "low", closeCall: true, reason: `Equal coverage below the ${rules.coverageMinimumPct}% minimum (${both}); higher score chosen, but scores are not interpretable yet.` };
+  }
+  const role: Role = a.coveragePct > b.coveragePct ? "PM" : "SPM";
+  return {
+    ...base,
+    role,
+    basis: "coverage",
+    confidence: "low",
+    closeCall: false,
+    reason: `Scores can't be compared yet (needs ≥${rules.coverageMinimumPct}% coverage in both and ≤${rules.maxComparableCoverageGapPct} pp apart): ${both}. Assigned to the role with more evidence in the CV.`,
+  };
 }

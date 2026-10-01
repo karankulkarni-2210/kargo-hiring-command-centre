@@ -14,6 +14,7 @@ export async function POST(req: Request, ctx: RouteContext<"/api/candidates/[id]
     if (!parsed.success) throw new HttpError(400, "kind must be invite or rejection");
     const { data: cand } = await supabase.from("candidates").select("applied_role").eq("id", id).maybeSingle();
     if (!cand) throw new HttpError(404, "Candidate not found");
+    if (!cand.applied_role) throw new HttpError(409, "Assign this candidate to PM or SPM first.");
     await enqueue(supabase, "draft", id, cand.applied_role, `draft:${id}:${parsed.data.kind}`, { kind: parsed.data.kind, regenerate: true });
     return { queued: true };
   });

@@ -16,6 +16,7 @@ export async function POST(req: Request, ctx: RouteContext<"/api/candidates/[id]
     if (!parsed.success) throw new HttpError(400, "Choose Advance, Hold or Decline and give a rationale (at least 10 characters).");
     const { data: cand } = await supabase.from("candidates").select("id, applied_role, applied_rank, in_top5").eq("id", id).maybeSingle();
     if (!cand) throw new HttpError(404, "Candidate not found");
+    if (!cand.applied_role) throw new HttpError(409, "Assign this candidate to PM or SPM before recording a decision.");
     const { data: ev } = await supabase
       .from("evaluations")
       .select("id, score, coverage_pct, recommendation, rubric_version_id, recommendation_reasons")
