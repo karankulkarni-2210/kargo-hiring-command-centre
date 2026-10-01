@@ -2,7 +2,7 @@ import "server-only";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { aiBrief, aiDraft, aiExtract, aiScore } from "../ai/tasks";
 import { GeminiConfigError, GeminiError, GeminiMalformedError, GeminiRateLimitError } from "../ai/gemini";
-import { assertRedacted, detectInjection, preRedactContacts, redactIdentity, residualIdentifierCheck } from "../redaction";
+import { assertRedacted, cleanPersonName, detectInjection, firstNameOf, preRedactContacts, redactIdentity, residualIdentifierCheck, samePerson } from "../redaction";
 import { loadActiveRubric, sha256Hex, type ActiveRubric } from "../rubric/store";
 import type { Role } from "../rubric/types";
 import {
@@ -125,8 +125,9 @@ async function handleExtract(sb: SupabaseClient, job: Job) {
     extraction = await aiExtract({ text: pre.text.slice(0, 60_000) });
   }
   const ex = extraction.value;
-  const fullName = ex.full_name?.trim() || null;
-  const firstName = fullName ? fullName.split(/\s+/)[0].replace(/[^\p{L}'-]/gu, "") || null : null;
+  const fullName = ex.full_name?.trim() || null; // raw, verbatim — used for redaction
+  const displayName = cleanPersonName(fullName); // cleaned — stored, displayed, used in greetings
+  const firstName = firstNameOf(displayName);
 
   const red = redactIdentity(pre.text, {
     fullName,
@@ -150,7 +151,7 @@ async function handleExtract(sb: SupabaseClient, job: Job) {
 
   const { error: e1 } = await sb.from("candidate_identities").upsert({
     candidate_id: id,
-    full_name: fullName,
+    full_name: displayName,
     first_name: firstName,
     email: pre.captured.emails[0] ?? null,
     phone: pre.captured.phones[0] ?? null,
@@ -184,10 +185,12 @@ async function handleExtract(sb: SupabaseClient, job: Job) {
     throw new PermanentJobError(`Redaction check failed (${red.report.residual.join(", ")}). Scoring blocked to protect identifiers — review this CV manually.`);
   }
 
-  // Possible duplicate person (different file, same email) — flagged, never merged automatically.
-  if (pre.captured.emails[0]) {
-    const { data: same } = await sb.from("candidate_identities").select("candidate_id").eq("email", pre.captured.emails[0]).neq("candidate_id", id).limit(1);
-    if (same?.length) await setCandidate(sb, id, { possible_duplicate_of: same[0].candidate_id });
+  // Possible duplicate person: a different file with the same email AND the same name (shared inboxes,
+  // e.g. a course test address, are common, so email alone is not enough). Flagged, never merged.
+  if (pre.captured.emails[0] && displayName) {
+    const { data: same } = await sb.from("candidate_identities").select("candidate_id, full_name").eq("email", pre.captured.emails[0]).neq("candidate_id", id).limit(50);
+    const match = (same ?? []).find((s) => samePerson(s.full_name, displayName));
+    await setCandidate(sb, id, { possible_duplicate_of: match ? match.candidate_id : null });
   }
 
   await setCandidate(sb, id, { status: "extracted" });

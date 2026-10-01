@@ -53,6 +53,46 @@ export function preRedactContacts(text: string): { text: string; captured: Conta
 
 const escapeRe = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+/**
+ * Clean a name copied verbatim from a CV for display/greeting. PDF text layers often concatenate a
+ * styled header with the plain name ("ROHAN MEHTARohan Mehta"); all-caps names read badly in emails.
+ * The raw string is still used for redaction, so nothing identifying slips through.
+ */
+export function cleanPersonName(raw: string | null | undefined): string | null {
+  if (!raw) return null;
+  let n = raw.replace(/\s+/g, " ").trim();
+  if (!n) return null;
+  const compact = n.replace(/\s+/g, "");
+  const half = compact.length / 2;
+  if (Number.isInteger(half) && half >= 6 && compact.slice(0, half).toLowerCase() === compact.slice(half).toLowerCase()) {
+    // Find the split point in the spaced string that corresponds to the second copy.
+    let seen = 0;
+    let cut = 0;
+    for (let i = 0; i < n.length; i++) {
+      if (n[i] !== " ") seen++;
+      if (seen === half) {
+        cut = i + 1;
+        break;
+      }
+    }
+    const a = n.slice(0, cut).trim();
+    const b = n.slice(cut).trim();
+    n = b !== b.toUpperCase() ? b : a; // prefer the mixed-case copy
+  }
+  if (n === n.toUpperCase() && /\p{L}/u.test(n)) n = n.toLowerCase().replace(/(^|[\s'-])(\p{L})/gu, (_m, p: string, c: string) => p + c.toUpperCase());
+  return n;
+}
+
+export function firstNameOf(name: string | null): string | null {
+  if (!name) return null;
+  return name.split(/\s+/)[0].replace(/[^\p{L}'-]/gu, "") || null;
+}
+
+export function samePerson(a: string | null | undefined, b: string | null | undefined): boolean {
+  const k = (x: string | null | undefined) => (cleanPersonName(x) ?? "").toLowerCase().replace(/[^\p{L}]/gu, "");
+  return Boolean(k(a)) && k(a) === k(b);
+}
+
 export function nameTokens(fullName: string | null | undefined): string[] {
   if (!fullName) return [];
   return Array.from(

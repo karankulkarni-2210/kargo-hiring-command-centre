@@ -68,3 +68,24 @@ describe("CVs are untrusted data", () => {
     expect(w).toContain("[removed-tag]");
   });
 });
+
+describe("name clean-up for display and greetings (raw name still used for redaction)", () => {
+  it("collapses a PDF-doubled name and fixes all-caps", async () => {
+    const { cleanPersonName, firstNameOf, samePerson } = await import("@/lib/redaction");
+    expect(cleanPersonName("ROHAN MEHTARohan Mehta")).toBe("Rohan Mehta");
+    expect(cleanPersonName("ARNAV SENArnav Sen")).toBe("Arnav Sen");
+    expect(cleanPersonName("PRIYA SHARMA")).toBe("Priya Sharma");
+    expect(cleanPersonName("Asha Varma")).toBe("Asha Varma");
+    expect(cleanPersonName("Lee Lee")).toBe("Lee Lee"); // short repeated names are left alone
+    expect(firstNameOf(cleanPersonName("ROHAN MEHTARohan Mehta"))).toBe("Rohan");
+    expect(samePerson("ROHAN MEHTARohan Mehta", "Rohan Mehta")).toBe(true);
+    expect(samePerson("Rohan Mehta", "Priya Sharma")).toBe(false);
+  });
+  it("still fully redacts text containing the doubled raw name", async () => {
+    const { redactIdentity, residualIdentifierCheck } = await import("@/lib/redaction");
+    const raw = "ROHAN MEHTARohan Mehta\nStrategy lead. Rohan led the GTM plan.";
+    const { text } = redactIdentity(raw, { fullName: "ROHAN MEHTARohan Mehta", locationText: null, sensitiveLines: [] });
+    expect(text).not.toMatch(/rohan|mehta/i);
+    expect(residualIdentifierCheck(text, { fullName: "Rohan Mehta" })).toEqual([]);
+  });
+});
