@@ -1,0 +1,20 @@
+SYNTHETIC TEST CV — fictional person created for testing the Kargo Hiring Command Centre. Not a real applicant.
+
+Rohit Kale
+Pune | rohit.kale.synthetic@example.com | 98765 43210
+
+SUMMARY
+Hard-working professional seeking a senior product role. Team player with strong communication skills.
+
+EXPERIENCE
+Associate Product Manager — Large Retail Corp, Pune | 2022 – Present
+- Worked on the loyalty app as part of a team of 12 PMs.
+- Wrote user stories when requested by the Group PM, who decided the roadmap.
+- I prefer clear processes; requirements should come from the business stakeholders and sales.
+- Delivered integration tickets to the spec provided by the architecture team.
+
+Sales Executive — Consumer Goods Co | 2019 – 2022
+- Met monthly targets.
+
+EDUCATION
+MBA (Marketing), 2019

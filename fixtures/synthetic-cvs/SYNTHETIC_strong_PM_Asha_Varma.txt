@@ -1,0 +1,23 @@
+SYNTHETIC TEST CV — fictional person created for testing the Kargo Hiring Command Centre. Not a real applicant.
+
+Asha Varma
+Mumbai, Maharashtra | asha.varma.synthetic@example.com | +91 98200 11223 | linkedin.com/in/asha-varma-synthetic
+Date of Birth: 14 March 1996
+
+PROFILE
+Product Manager with 3 years owning operations tooling at a first-time-building logistics startup.
+
+EXPERIENCE
+Product Manager — ShipLane (Series A freight visibility startup), Mumbai | Jan 2022 – Present
+- Spent two days a month on the floor of three freight forwarders' operations teams, watching coordinators chase carrier updates on WhatsApp; this changed our Q3 roadmap from a dashboard to an exception inbox.
+- Shipped 9 releases in two-week cycles; defined adoption targets before each launch and checked usage at 2 and 6 weeks.
+- Killed the "auto-ETA email" feature after 6 weeks when only 4% of customers opened it, and moved the two engineers to document-checklist automation, which 70% of active accounts now use weekly without prompting.
+- Wrote problem statements and acceptance criteria for every ticket; kept a refined backlog two to three sprints ahead with the engineering lead.
+- Set up a weekly decision log and a monthly outcome review for the product and ops team where none existed; both are still used by the team.
+- Mapped the bill-of-lading and delivery-order workflow with customer ops users, including where documents get stuck at the CFS.
+
+Business Analyst — Coastline 3PL, Navi Mumbai | Jun 2019 – Dec 2021
+- Gathered requirements directly from warehouse supervisors for a dock-scheduling tool I specified and rolled out.
+
+EDUCATION
+B.Tech, 2018

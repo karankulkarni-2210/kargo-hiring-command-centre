@@ -1,0 +1,17 @@
+SYNTHETIC TEST CV — fictional person created for testing the Kargo Hiring Command Centre. Not a real applicant.
+
+Neha Iyer
+Bengaluru | neha.iyer.synthetic@example.com | +91-99000-55667
+Open to relocating to Mumbai for the right role.
+
+EXPERIENCE
+Senior Product Manager — TradeGrid (B2B SaaS), Bengaluru | 2019 – Present
+- Owned the ERP and carrier-API integration layer as the only PM on the platform team; decided to configure a generic EDI connector instead of building three custom ERP connectors, cutting maintenance tickets by roughly half.
+- Defined data-freshness SLAs for shipment status feeds and led two post-mortems with customers after a partner sent duplicate events.
+- Product lead for the platform.
+
+Product Manager — FinServe, Bengaluru | 2016 – 2019
+- Managed product.
+
+EDUCATION
+Engineering degree

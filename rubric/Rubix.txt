@@ -1,0 +1,1362 @@
+KARGO HIRING EVALUATION RUBRIC  (Rubix.txt)
+Roles: Product Manager (PM) and Senior Product Manager (SPM)
+Version: 0.1  |  Prepared: 2026-09-28  |  Encoding: UTF-8 plain text
+
+****************************************************************************************************
+STATUS: PROVISIONAL
+This rubric is PROVISIONAL. The historical hire profiles (hires/) that were meant to supply
+application observations, interview findings and employment outcomes were not available. As a
+result, Section 2 (Historical Outcome Matrix) is empty, Section 3 contains JD-derived hypotheses
+rather than historical success patterns, and no criterion or weight has historical support. Every
+criterion below rests on the two job descriptions only. Rebuild Sections 2-3 and recalibrate
+Sections 4-6 once hires/ is supplied.
+****************************************************************************************************
+
+Use and authority: this document is a decision aid. It produces recommendations for a human
+reviewer. It does not make hiring decisions, and a recommendation does not authorize contacting any
+candidate. The founder decides.
+
+Contents
+  1. Input inventory and limitations
+  2. Historical outcome matrix
+  3. Success-pattern and counterevidence table
+  4. Product Manager scorecard
+  5. Senior Product Manager scorecard
+  6. Scoring, coverage, and review rules
+  7. Reusable candidate evaluation template
+  8. Calibration and quality check
+
+====================================================================================================
+1. INPUT INVENTORY AND LIMITATIONS
+====================================================================================================
+
+
+1.1 Claim labels used throughout
+--------------------------------
++-----------------+----------------------------------------------------------------------------------+
+| Label           | Meaning                                                                          |
++=================+==================================================================================+
+| FACT            | Explicitly stated in a named source. Always carries a source locator.            |
++-----------------+----------------------------------------------------------------------------------+
+| INFERENCE       | An interpretation supported by cited facts. The supporting facts are cited.      |
++-----------------+----------------------------------------------------------------------------------+
+| PROPOSED RULE   | A suggested scoring or workflow convention. Configurable; not derived from data; |
+|                 | requires founder approval and calibration.                                       |
++-----------------+----------------------------------------------------------------------------------+
+
+1.2 Source abbreviations and locator format
+-------------------------------------------
++---------+-----------------------------------------------+---------------------------------------------+
+| Tag     | File (as found on disk)                       | Location                                    |
++=========+===============================================+=============================================+
+| PMJD    | MESA_Kargo_JD_Product_Manager.docx            | /mnt/user-data/uploads/ (not in a jds/      |
+|         |                                               | folder)                                     |
++---------+-----------------------------------------------+---------------------------------------------+
+| SPMJD   | MESA_Kargo_JD_Senior_Product_Manager.docx     | /mnt/user-data/uploads/ (not in a jds/      |
+|         |                                               | folder)                                     |
++---------+-----------------------------------------------+---------------------------------------------+
+Locator format: TAG / "Heading" / bN, where bN is the Nth dash-prefixed bullet under that heading,
+counting from 1. "header" means the italic line directly under the role title. "footer" means the
+closing italic line. Example: PMJD / "What We're Looking For" / b3. The .docx files have no fixed
+pagination, so headings are used instead of page numbers.
+
+1.3 Files and folders reviewed
+------------------------------
++--------------------------------+-----------------------------------+---------------------------------+
+| Expected / found input         | Status                            | Role in analysis                |
++================================+===================================+=================================+
+| hires/ (historical hire        | MISSING. No hires/ directory      | Essential. Required for         |
+| profiles: application          | exists in the project or anywhere | Sections 2-3 and for any        |
+| observations, interview        | searched in the file system. No   | historical basis of criteria or |
+| findings, employment outcomes) | file containing hire history was  | weights. Its absence is the     |
+|                                | uploaded.                         | reason this rubric is           |
+|                                |                                   | PROVISIONAL.                    |
++--------------------------------+-----------------------------------+---------------------------------+
+| jds/ (job descriptions)        | No jds/ directory. Both JDs were  | Primary and only substantive    |
+|                                | found loose in /mnt/user-         | basis for the criteria,         |
+|                                | data/uploads/ and read in full.   | anchors, essential requirements |
+|                                |                                   | and PM/SPM differentiation.     |
++--------------------------------+-----------------------------------+---------------------------------+
+| PMJD                           | READ. Text read fully. The        | Source for the PM scorecard and |
+|                                | embedded comments.xml,            | PM essential requirements.      |
+|                                | footnotes.xml and endnotes.xml    |                                 |
+|                                | contain no text; they are empty   |                                 |
+|                                | template stubs. No hidden text    |                                 |
+|                                | was found.                        |                                 |
++--------------------------------+-----------------------------------+---------------------------------+
+| SPMJD                          | READ, with the same checks as     | Source for the SPM scorecard    |
+|                                | PMJD. No comments or hidden text. | and SPM essential requirements. |
++--------------------------------+-----------------------------------+---------------------------------+
+| Case brief                     | NOT FOUND.                        | Optional business context. No   |
+|                                |                                   | context beyond the JDs' "About  |
+|                                |                                   | Kargo" sections was used. The   |
+|                                |                                   | "MESA" prefix in the JD         |
+|                                |                                   | filenames is not explained by   |
+|                                |                                   | any available source.           |
++--------------------------------+-----------------------------------+---------------------------------+
+| cv_01 ... cv_08 (8 files:      | READABLE but EXCLUDED. These are  | Not used. SCOPE says not to     |
+| cv_01_rohan_desai,             | applicant CVs. They contain no    | evaluate current applicants.    |
+| cv_02_sunita_krishnamurthy,    | interview findings, performance   | Using them to derive patterns   |
+| cv_03_vikram_nair,             | ratings or employment outcomes at | or set weights would tune the   |
+| cv_04_aditya_shetty,           | Kargo, so they are not historical | rubric to the current pool. No  |
+| cv_05_preetham_rao,            | hire profiles.                    | CV content informed any         |
+| cv_06_meghna_tiwari,           |                                   | criterion, weight or anchor.    |
+| cv_07_lavanya_iyer,            |                                   |                                 |
+| cv_08_rahul_bose)              |                                   |                                 |
++--------------------------------+-----------------------------------+---------------------------------+
+
+1.4 Missing, unreadable, contradictory, or ambiguous inputs
+-----------------------------------------------------------
++------+----------------------------------+---------------+-------------------+----------------------------+
+| ID   | Issue                            | Type          | Source / basis    | Effect on rubric           |
++======+==================================+===============+===================+============================+
+| G1   | No historical hire data          | Missing,      | File-system       | Sections 2-3 cannot be     |
+|      | (hires/).                        | essential     | search (Section   | supported. All weights are |
+|      |                                  |               | 1.3)              | judgment. The              |
+|      |                                  |               |                   | retrospective consistency  |
+|      |                                  |               |                   | check is not possible.     |
++------+----------------------------------+---------------+-------------------+----------------------------+
+| G2   | No case brief.                   | Missing,      | File-system       | Business context is        |
+|      |                                  | optional      | search            | limited to the JDs.        |
++------+----------------------------------+---------------+-------------------+----------------------------+
+| G3   | No definition of the performance | Missing       | Follows from G1   | Outcome categories in      |
+|      | rating scale (for example, what  |               |                   | Section 2.2 are PROPOSED   |
+|      | "Meets Expectations" means) and  |               |                   | RULES pending founder      |
+|      | no definition of a successful    |               |                   | definition.                |
+|      | hire.                            |               |                   |                            |
++------+----------------------------------+---------------+-------------------+----------------------------+
+| C1   | Both JDs assign the building of  | Contradiction | PMJD and SPMJD as | If both roles are filled,  |
+|      | PM practices. PMJD: "The rhythms | / overlap     | cited             | ownership of the PM        |
+|      | a PM function needs" (PMJD /     | (INFERENCE)   |                   | function is ambiguous. The |
+|      | "What You'll Own" / b4); "You'll |               |                   | rubric separates the two:  |
+|      | build those" (PMJD / "What We're |               |                   | PM-5 covers rhythms for    |
+|      | Looking For" / b2); "building a  |               |                   | the PM's own work and      |
+|      | product function from scratch"   |               |                   | team; SPM-7 covers         |
+|      | (PMJD / "What Kargo Offers" /    |               |                   | standards for the PM       |
+|      | b4). SPMJD: "Helping define the  |               |                   | function and for other     |
+|      | practices, decision frameworks"  |               |                   | PMs. Founder to confirm    |
+|      | (SPMJD / "What You'll Own" /     |               |                   | (Section 8.3, Q3).         |
+|      | b5); "The chance to build a PM   |               |                   |                            |
+|      | function" (SPMJD / "What Kargo   |               |                   |                            |
+|      | Offers" / b4).                   |               |                   |                            |
++------+----------------------------------+---------------+-------------------+----------------------------+
+| C2   | PMJD says the hire is "the first | Ambiguity     | As cited          | The rubric does not assume |
+|      | PM at Kargo focused on our core  |               |                   | a reporting line between   |
+|      | platform" and that there is "no  |               |                   | PM and SPM.                |
+|      | dedicated PM function yet" (PMJD |               |                   |                            |
+|      | / "Why This Role Exists"). SPMJD |               |                   |                            |
+|      | says the hire "will also be the  |               |                   |                            |
+|      | most senior PM at Kargo" (SPMJD  |               |                   |                            |
+|      | / "Why This Role Exists"). Both  |               |                   |                            |
+|      | report to Arjun Mehta (both      |               |                   |                            |
+|      | headers). The relationship       |               |                   |                            |
+|      | between the two roles and the    |               |                   |                            |
+|      | hiring order are not stated.     |               |                   |                            |
++------+----------------------------------+---------------+-------------------+----------------------------+
+| C3   | The experience ranges "2-4       | Ambiguity     | As cited          | Treated as "essentiality   |
+|      | years" (PMJD / "What We're       |               |                   | to confirm". Never used    |
+|      | Looking For" / b1) and "5-8      |               |                   | for automatic exclusion.   |
+|      | years" (SPMJD / "What We're      |               |                   | An upper bound used as an  |
+|      | Looking For" / b1) appear under  |               |                   | exclusion rule can act as  |
+|      | "What We're Looking For".        |               |                   | an age proxy (Section      |
+|      | Neither JD says whether the      |               |                   | 3.3).                      |
+|      | bounds are hard, or whether      |               |                   |                            |
+|      | product ownership under a non-PM |               |                   |                            |
+|      | title counts.                    |               |                   |                            |
++------+----------------------------------+---------------+-------------------+----------------------------+
+| C4   | SPMJD calls operations-domain    | Ambiguity     | As cited          | Weighted as a scored       |
+|      | familiarity "a genuine advantage |               |                   | criterion (SPM-6), not an  |
+|      | here, not a nice-to-have" (SPMJD |               |                   | essential requirement.     |
+|      | / "What We're Looking For" /     |               |                   | Founder to confirm (Q4).   |
+|      | b5). This wording sits between a |               |                   |                            |
+|      | preference and a requirement.    |               |                   |                            |
++------+----------------------------------+---------------+-------------------+----------------------------+
+| C5   | The PM JD was attached under a   | Minor         | Upload listing vs | Treated as the same file.  |
+|      | display name with a space        | inconsistency | file system       | No effect.                 |
+|      | ("MESA_Kargo_JD_Product          |               |                   |                            |
+|      | Manager.docx"); on disk the name |               |                   |                            |
+|      | uses an underscore.              |               |                   |                            |
++------+----------------------------------+---------------+-------------------+----------------------------+
+
+1.5 Facts extracted from the JDs (reference list)
+-------------------------------------------------
+Each fact below is cited once here and referred to by its locator in later sections. All are FACT.
++-------+--------------------------------------------------------------+-------------------------------+
+| Fact  | Statement                                                    | Source locator                |
++=======+==============================================================+===============================+
+| F1    | Kargo builds software for mid-sized freight forwarders and   | PMJD / "About Kargo"; SPMJD / |
+|       | 3PLs: shipment tracking, documentation and carrier           | "About Kargo"                 |
+|       | coordination. It is Series A with 40 people, scaling to 70   |                               |
+|       | by December.                                                 |                               |
++-------+--------------------------------------------------------------+-------------------------------+
+| F2    | Both roles are full-time, in-office in Mumbai, and report to | PMJD / header, / "What We're  |
+|       | Arjun Mehta, Founder. Candidates must be Mumbai-based or     | Looking For" / b5, / footer;  |
+|       | willing to relocate.                                         | SPMJD / header, / "What We're |
+|       |                                                              | Looking For" / b6, / footer   |
++-------+--------------------------------------------------------------+-------------------------------+
+| F3    | PM owns the core operations platform roadmap (tracking,      | PMJD / "What You'll Own" /    |
+|       | documentation workflows, status visibility), customer        | b1-b4                         |
+|       | discovery, working directly with engineering on what gets    |                               |
+|       | built, and PM rhythms.                                       |                               |
++-------+--------------------------------------------------------------+-------------------------------+
+| F4    | PM success at 6 months: two or more features customers use   | PMJD / "What Success Looks    |
+|       | without being asked; can name the three most important next  | Like at 6 Months" / b1-b4     |
+|       | builds and why; engineering knows what it is building three  |                               |
+|       | sprints out; has spent time inside freight forwarding        |                               |
+|       | operations in person.                                        |                               |
++-------+--------------------------------------------------------------+-------------------------------+
+| F5    | PM looking for: 2-4 years of PM experience, "ideally" at a   | PMJD / "What We're Looking    |
+|       | company building for the first time; comfort without         | For" / b1-b4                  |
+|       | structure; evidence of shipping, killing and learning in     |                               |
+|       | short cycles; curiosity about ground-level operations.       |                               |
++-------+--------------------------------------------------------------+-------------------------------+
+| F6    | SPM owns the integration and data layer (carrier systems,    | SPMJD / "What You'll Own" /   |
+|       | port portals, ERP, customers' freight tools); hard           | b1-b5                         |
+|       | architectural product calls (build / configure / stay away); |                               |
+|       | reliability and data-quality standards; cross-functional     |                               |
+|       | work with sales, engineering and customer operations on      |                               |
+|       | which integrations unlock or lose customers; and PM function |                               |
+|       | practices.                                                   |                               |
++-------+--------------------------------------------------------------+-------------------------------+
+| F7    | SPM success at 6 months: an integration roadmap that         | SPMJD / "What Success Looks   |
+|       | engineering, sales and Arjun trust and that "has not changed | Like at 6 Months" / b1-b4     |
+|       | three times in six weeks"; at least one major integration    |                               |
+|       | shipped that opened a segment or unblocked a deal; a         |                               |
+|       | defensible build / configure / not-touch point of view;      |                               |
+|       | clearer PM standards through demonstration.                  |                               |
++-------+--------------------------------------------------------------+-------------------------------+
+| F8    | SPM looking for: 5-8 years of PM experience with evidence of | SPMJD / "What We're Looking   |
+|       | owning an area without senior PMs above making the calls;    | For" / b1-b5                  |
+|       | platform, integration or complex-environment experience;     |                               |
+|       | making calls in ambiguity and living with consequences ("no  |                               |
+|       | committee"); early-stage time or equivalent evidence;        |                               |
+|       | operations-domain familiarity as a "genuine advantage".      |                               |
++-------+--------------------------------------------------------------+-------------------------------+
+| F9    | SPM decisions have "consequences we will feel two years from | SPMJD / "Why This Role        |
+|       | now". The SPM will be the most senior PM and help shape the  | Exists"; SPMJD / "What Kargo  |
+|       | function. The role "could become Head of Product".           | Offers" / b1                  |
++-------+--------------------------------------------------------------+-------------------------------+
+
+====================================================================================================
+2. HISTORICAL OUTCOME MATRIX
+====================================================================================================
+
+STATUS: CANNOT BE SUPPORTED. 0 historical hire records available (gap G1).
+
+No row has been filled in. No hire, rating, status or outcome has been assumed or invented. The
+empty matrix and the population rules below are kept so that the matrix can be completed once hires/
+is supplied.
+
++---------+--------+--------------+--------------+-------------+------------+--------------+-----------+
+| Hire    | Role   | Application  | Interview    | Reported    | Employment | Outcome inte | Source    |
+|         |        | evidence     | evidence     | performance | status     | rpretation   |           |
++=========+========+==============+==============+=============+============+==============+===========+
+| (none)  | -      | -            | -            | -           | -          | -            | -         |
++---------+--------+--------------+--------------+-------------+------------+--------------+-----------+
+|         |        |              |              |             |            |              |           |
++---------+--------+--------------+--------------+-------------+------------+--------------+-----------+
+
+2.1 Population rules (PROPOSED RULE)
+------------------------------------
+  - Application evidence: use only material available at application time (CV, application answers,
+    portfolio as submitted). Record its date. Never back-fill it with information learned later.
+  - Interview evidence: use only notes or scores recorded during the interview process, with the
+    date and the assessor's role. Keep these separate from application evidence.
+  - Reported performance: copy the rating verbatim, with the rating scale, date, period covered and
+    rater role. "Meets Expectations" is recorded as satisfactory, never as failure.
+  - Employment status: record only what is explicitly stated (for example "Active as of <date>",
+    "Resigned <date>", "Terminated <date>"). If it is not stated, write "Not stated". Do not infer
+    that someone stayed, left or was dismissed. A departure is not evidence of poor performance.
+  - Tenure: record start and end or as-of dates. Treat outcomes after less than 6 months as
+    Indeterminate unless a rating exists for that period (the 6-month threshold is configurable).
+  - Source: filename plus heading or passage for every cell that contains a claim.
+
+2.2 Outcome interpretation categories (PROPOSED RULE, pending founder definition of success, gap G3)
+----------------------------------------------------------------------------------------------------
++----------------+-----------------------------------------------------------------------------------+
+| Category       | Definition (performance-based; employment status is never used alone)             |
++================+===================================================================================+
+| Stronger       | Rating above the satisfactory level, or explicitly documented outcomes exceeding  |
+|                | role expectations (for example the JD 6-month success criteria, F4 / F7).         |
++----------------+-----------------------------------------------------------------------------------+
+| Satisfactory   | "Meets Expectations" or equivalent. Documented as meeting role expectations.      |
++----------------+-----------------------------------------------------------------------------------+
+| Weaker         | Rating below the satisfactory level, or explicitly documented performance         |
+|                | concerns.                                                                         |
++----------------+-----------------------------------------------------------------------------------+
+| Indeterminate  | No rating, tenure too short, conflicting records, or only employment status       |
+|                | available.                                                                        |
++----------------+-----------------------------------------------------------------------------------+
+Comparisons across hires must be made within the same role and seniority where possible. A stronger
+outcome for, say, an engineer does not establish what predicts success for a PM. With the sample
+sizes expected at a 40-person company, any comparison should be read as a hypothesis.
+
+====================================================================================================
+3. SUCCESS-PATTERN AND COUNTEREVIDENCE TABLE
+====================================================================================================
+
+STATUS: NO HISTORICAL PATTERNS CAN BE ESTABLISHED (0 cases with relevant information; gap G1).
+
+The table below is therefore not a set of historical success patterns. It lists JD-derived
+HYPOTHESES (H1-H10). Each describes an observable, job-relevant behavior that the JDs say matters.
+Each should be tested against hires/ once it is available. For every hypothesis, supporting cases =
+0 and cases with relevant information = 0. Evidence strength is "JD requirement only". Similarity to
+past hires is not used as a criterion anywhere in this rubric.
+
+3.1 Summary
+-----------
++------+----------------------------------------+----------------------+----------------------+-----------+
+| ID   | Observable behavior (short)            | Role relevance       | Type                 | Support / |
+|      |                                        |                      |                      | relevant  |
+|      |                                        |                      |                      | cases     |
++======+========================================+======================+======================+===========+
+| H1   | Discovers problems directly with       | PM, SPM              | Transferable         | 0 / 0     |
+|      | operational users, including observing |                      | (discovery method);  |           |
+|      | the work where it happens              |                      | the domain adds      |           |
+|      |                                        |                      | value but is not     |           |
+|      |                                        |                      | required             |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H2   | Ships in short cycles, checks real     | PM (core), SPM       | Transferable         | 0 / 0     |
+|      | use, and stops or redirects work that  |                      |                      |           |
+|      | isn't used                             |                      |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H3   | Produces a ranked, justified view of   | PM, SPM              | Transferable         | 0 / 0     |
+|      | what to build next and what not to     |                      |                      |           |
+|      | build                                  |                      |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H4   | Turns problems into buildable work     | PM (core)            | Transferable         | 0 / 0     |
+|      | with engineers and keeps a multi-      |                      |                      |           |
+|      | sprint horizon                         |                      |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H5   | Creates lightweight working practices  | PM (own rhythms),    | Transferable         | 0 / 0     |
+|      | where none exist                       | SPM (function        |                      |           |
+|      |                                        | standards)           |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H6   | Makes build / configure / avoid        | SPM (core)           | Role-specific (platf | 0 / 0     |
+|      | decisions on integration and platform  |                      | orm/integration PM   |           |
+|      | layers, weighing long-term             |                      | skill)               |           |
+|      | consequences                           |                      |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H7   | Makes and owns calls under ambiguity   | SPM (core), PM       | Transferable         | 0 / 0     |
+|      | without an approving layer             | (lesser)             |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H8   | Keeps a roadmap stable and trusted     | SPM (core), PM       | Transferable         | 0 / 0     |
+|      | across sales, engineering, customer    | (engineering-facing) |                      |           |
+|      | ops and founder                        |                      |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H9   | Defines and enforces reliability and   | SPM                  | Role-specific        | 0 / 0     |
+|      | data-quality standards for products    |                      |                      |           |
+|      | users rely on operationally            |                      |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+| H10  | Understands how operations-heavy work  | PM (preference), SPM | Role-specific domain | 0 / 0     |
+|      | runs day to day (logistics or          | (weighted advantage) | knowledge; learnable |           |
+|      | adjacent)                              |                      |                      |           |
++------+----------------------------------------+----------------------+----------------------+-----------+
+
+3.2 Detail (one record per table row)
+-------------------------------------
+H1  Discovers problems directly with operational users, including observing the work where it happens
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate has personally run conversations with, or observed, end users
+                             doing operational work, and can describe specific workflow breakpoints
+                             they found and what changed as a result.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: PMJD / "What You'll Own" / b2; PMJD
+                             / "What Success Looks Like at 6 Months" / b4; PMJD / "What We're
+                             Looking For" / b4.
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            PM, SPM. Type: Transferable (discovery method); the domain adds value
+                             but is not required.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: partial. Look for named discovery activities tied to a changed
+                             decision.
+  Interview verification:    Interview: walk-through of a specific discovery episode, with detail
+                             that is hard to fabricate.
+
+H2  Ships in short cycles, checks real use, and stops or redirects work that isn't used
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate took work to release, checked adoption or user response after
+                             release, and at least once stopped or redirected work based on that
+                             evidence.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: PMJD / "What We're Looking For" /
+                             b3; PMJD / "What Success Looks Like at 6 Months" / b1; PMJD / "What
+                             You'll Own" / b4.
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            PM (core), SPM. Type: Transferable.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: yes, for shipped and stopped items. Adoption claims are self-
+                             reported.
+  Interview verification:    Interview: what signal showed the thing wasn't working, and how quickly
+                             they acted.
+
+H3  Produces a ranked, justified view of what to build next and what not to build
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Given competing requests, the candidate ranks them with explicit
+                             reasoning and names what is deliberately not being done.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: PMJD / "What Success Looks Like at 6
+                             Months" / b2; PMJD / "What You'll Own" / b3; SPMJD / "What Success
+                             Looks Like at 6 Months" / b1.
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            PM, SPM. Type: Transferable.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: generally not observable.
+  Interview verification:    Interview or work sample: a prioritization exercise using a Kargo-like
+                             scenario.
+
+H4  Turns problems into buildable work with engineers and keeps a multi-sprint horizon
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate writes clear problem statements and acceptance criteria and
+                             keeps engineers informed several sprints ahead.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: PMJD / "What You'll Own" / b3; PMJD
+                             / "What Success Looks Like at 6 Months" / b3.
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            PM (core). Type: Transferable.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: partial.
+  Interview verification:    Interview: redacted spec or ticket review and the pushback received.
+
+H5  Creates lightweight working practices where none exist
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate created a working practice (decision log, prioritization
+                             cadence, outcome tracking, documentation standard) that others then
+                             used.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: PMJD / "What We're Looking For" /
+                             b2; PMJD / "What You'll Own" / b4; SPMJD / "What You'll Own" / b5;
+                             SPMJD / "What Success Looks Like at 6 Months" / b4.
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            PM (own rhythms), SPM (function standards). Type: Transferable.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: yes, often explicit.
+  Interview verification:    Interview: what they chose to leave out, and whether adoption was
+                             voluntary.
+
+H6  Makes build / configure / avoid decisions on integration and platform layers, weighing long-term consequences
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate has made and can defend decisions about building, configuring
+                             or declining integrations and platform capabilities, including
+                             maintenance and dependency costs.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: SPMJD / "What You'll Own" / b1-b2;
+                             SPMJD / "What We're Looking For" / b2; SPMJD / "What Success Looks Like
+                             at 6 Months" / b2-b3; SPMJD / "Why This Role Exists".
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            SPM (core). Type: Role-specific (platform/integration PM skill).
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: partial (exposure is visible; judgment quality is not).
+  Interview verification:    Work sample: a build / configure / avoid case.
+
+H7  Makes and owns calls under ambiguity without an approving layer
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate made consequential calls without a senior layer approving
+                             them, communicated the rationale, and dealt with the outcome, including
+                             when it went wrong.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: SPMJD / "What We're Looking For" /
+                             b1, b3, b4.
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            SPM (core), PM (lesser). Type: Transferable.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: partial.
+  Interview verification:    Interview: a call that went wrong and what they did afterwards.
+
+H8  Keeps a roadmap stable and trusted across sales, engineering, customer ops and founder
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate maintains a roadmap that stakeholders trust, with explicit
+                             criteria for changing it, and resolves conflicting demands
+                             transparently.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: SPMJD / "What Success Looks Like at
+                             6 Months" / b1; SPMJD / "What You'll Own" / b4; PMJD / "What Success
+                             Looks Like at 6 Months" / b3.
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            SPM (core), PM (engineering-facing). Type: Transferable.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: not reliably observable.
+  Interview verification:    Interview: a stakeholder-conflict scenario; references (if used).
+
+H9  Defines and enforces reliability and data-quality standards for products users rely on operationally
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate defined reliability or data-quality measures for a product,
+                             made trade-offs to meet them, and handled incidents with users.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: SPMJD / "What You'll Own" / b3.
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            SPM. Type: Role-specific.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: partial.
+  Interview verification:    Interview: an incident walk-through.
+
+H10  Understands how operations-heavy work runs day to day (logistics or adjacent)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Observable behavior:       Candidate can describe concretely how operational users' days run, what
+                             breaks and why, from direct exposure or specific preparation.
+  Supporting hires/evidence: None available: 0 supporting cases out of 0 cases with relevant
+                             information. Basis is the JD only: PMJD / "What We're Looking For" /
+                             b4; SPMJD / "What We're Looking For" / b5; PMJD and SPMJD / "About
+                             Kargo".
+  Counterexamples:           Not testable without hires/. When data arrives, look actively for hires
+                             who showed this behavior but had weaker outcomes, and for hires who
+                             lacked it but had stronger outcomes.
+  Role relevance:            PM (preference), SPM (weighted advantage). Type: Role-specific domain
+                             knowledge; learnable.
+  Evidence strength:         JD requirement only. HYPOTHESIS; not a validated predictor.
+  Screening evidence:        CV: partial (exposure is visible). An industry or employer label alone
+                             is not evidence.
+  Interview verification:    Interview: "Describe a freight forwarder's morning. What goes wrong?"
+
+
+3.3 Excluded or translated signals
+----------------------------------
++--------------------------------+----------------------------------------+----------------------------+
+| Signal                         | Treatment                              | Reason                     |
++================================+========================================+============================+
+| Name, age, gender, caste,      | EXCLUDED. Never recorded as evidence.  | Not job-relevant; legal    |
+| religion, marital status,      |                                        | and fairness risk.         |
+| photo, home region, or other   |                                        |                            |
+| protected characteristics and  |                                        |                            |
+| their proxies                  |                                        |                            |
++--------------------------------+----------------------------------------+----------------------------+
+| Graduation year or total years | Years are handled only as essential-   | The upper bound can proxy  |
+| used as an upper cut-off       | requirement status ("Unclear" when     | for age (C3).              |
+|                                | outside the stated range). They are    |                            |
+|                                | never scored and never used for        |                            |
+|                                | automatic exclusion.                   |                            |
++--------------------------------+----------------------------------------+----------------------------+
+| School or employer prestige,   | EXCLUDED from scoring. A certification | Prestige is not an         |
+| brand-name certifications      | counts only if the candidate links it  | observable job behavior.   |
+|                                | to a demonstrated behavior.            |                            |
++--------------------------------+----------------------------------------+----------------------------+
+| Industry or employer label     | Not scored by itself. Only             | A label is a background-   |
+| (for example "worked at a      | demonstrated workflow understanding    | based assumption.          |
+| logistics company")            | counts (PM-6 / SPM-6).                 |                            |
++--------------------------------+----------------------------------------+----------------------------+
+| "Early-stage company" on the   | Not scored by itself. The behavior     | SPMJD / "What We're        |
+| CV                             | (operating where rules were not        | Looking For" / b4 allows   |
+|                                | written) is scored in PM-5 / SPM-2.    | "or strong evidence".      |
++--------------------------------+----------------------------------------+----------------------------+
+| "Culture fit", "founder likes  | Translated into observable behavior    | Undefined preferences      |
+| them", "doesn't hedge", or     | (decision ownership with rationale,    | invite bias.               |
+| similar                        | SPM-2 / PM-3) or excluded.             |                            |
++--------------------------------+----------------------------------------+----------------------------+
+| Similarity to successful past  | EXCLUDED as a criterion.               | Similarity is not          |
+| hires                          |                                        | suitability.               |
++--------------------------------+----------------------------------------+----------------------------+
+| Being in person at customer    | Asked about as a job task: willingness | It is a job requirement,   |
+| sites (PMJD / "What Success    | and approach. No assumptions about     | not a personal trait.      |
+| Looks Like at 6 Months" / b4)  | physical ability. Accommodation is a   |                            |
+|                                | founder/HR matter.                     |                            |
++--------------------------------+----------------------------------------+----------------------------+
+
+====================================================================================================
+4. PRODUCT MANAGER SCORECARD
+====================================================================================================
+
+All weights are PROPOSED JUDGMENT based on the emphasis in the PMJD. They are not statistically
+validated. There is no historical basis (gap G1). Evidence-mode labels: [CV-OK] means the criterion
+can be scored from the CV; [CV-PARTIAL] means a CV score is allowed at Low/Medium confidence and
+must be re-scored after interview; [INTERVIEW/WORK-SAMPLE ONLY] means the criterion must be NE at CV
+stage.
+
+4.1 PM scorecard - summary
+--------------------------
++---------+------------------------------------------------------+----------------------------+----------+
+| ID      | Criterion                                            | Evidence mode              | Weight % |
++=========+======================================================+============================+==========+
+| PM-1    | Ground-level operational discovery                   | CV-PARTIAL                 | 20       |
++---------+------------------------------------------------------+----------------------------+----------+
+| PM-2    | Ship, measure, and stop in short cycles              | CV-OK                      | 25       |
++---------+------------------------------------------------------+----------------------------+----------+
+| PM-3    | Prioritization judgment and rationale                | INTERVIEW/WORK-SAMPLE ONLY | 20       |
++---------+------------------------------------------------------+----------------------------+----------+
+| PM-4    | Engineering partnership and planning horizon         | CV-PARTIAL                 | 15       |
++---------+------------------------------------------------------+----------------------------+----------+
+| PM-5    | Building lightweight working practices where none    | CV-OK                      | 10       |
+|         | exist                                                |                            |          |
++---------+------------------------------------------------------+----------------------------+----------+
+| PM-6    | Operations workflow understanding                    | CV-PARTIAL                 | 10       |
++---------+------------------------------------------------------+----------------------------+----------+
+|         | TOTAL                                                |                            | 100      |
++---------+------------------------------------------------------+----------------------------+----------+
+
+4.1 PM scorecard - full criteria (one record per table row)
+-----------------------------------------------------------
+PM-1  Ground-level operational discovery  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         PM-1
+  Criterion:            Ground-level operational discovery
+  Expected job outcome: Can say where the platform helps and fails for daily ops users. Has spent
+                        in-person time inside freight forwarding operations by month 6.
+  Basis and sources:    PMJD / "What You'll Own" / b2; PMJD / "What Success Looks Like at 6 Months"
+                        / b4; PMJD / "What We're Looking For" / b4 (H1). The weight reflects the
+                        prominence of discovery in three JD sections. No historical basis.
+  Weight %:             20  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: cannot describe any end-user workflow they
+                        studied, or states that requirements come only from stakeholders or sales.
+                        2 = Discovery is secondhand only (sales requests, tickets, surveys).
+                        Describes users in generic terms.
+                        3 = Has run direct conversations with users of their own product area.
+                        Describes at least one concrete workflow and one finding that changed a
+                        decision.
+                        4 = Runs regular, structured direct discovery that includes watching users
+                        do the work (on site or live). Findings repeatedly changed priorities or
+                        designs. Names specific breakpoints.
+                        5 = Keeps an ongoing discovery practice with operational users, including
+                        in-person observation. Found a non-obvious mismatch between stated and
+                        actual workflow that led to a clearly described change. Can teach the method
+                        to others.
+  Acceptable evidence:  CV descriptions of discovery work tied to a changed decision. Requirement-
+                        gathering done directly with operational end users in a non-PM role counts
+                        if the candidate defined the problem. Qualitative accounts count as much as
+                        metrics.
+  Interview probe:      "Walk me through the last time watching a user do their job changed what you
+                        built. What did you see, what did you change, and what happened next?"
+
+PM-2  Ship, measure, and stop in short cycles  [CV-OK]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         PM-2
+  Criterion:            Ship, measure, and stop in short cycles
+  Expected job outcome: Two or more features in customer use without prompting by month 6. Knows
+                        whether each release worked.
+  Basis and sources:    PMJD / "What We're Looking For" / b3; PMJD / "What Success Looks Like at 6
+                        Months" / b1; PMJD / "What You'll Own" / b4 (tracking whether something
+                        worked) (H2). This is the highest weight because it maps directly to the
+                        first 6-month outcome. Judgment only.
+  Weight %:             25  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: no shipped work attributable to the
+                        candidate, or cannot say whether anything they shipped was used.
+                        2 = Shipped as part of a team but own contribution is unclear. Defines
+                        success as "launched", not "used".
+                        3 = Personally drove at least one item to release and checked use or user
+                        response afterwards. Can say what they learned.
+                        4 = Several releases in short cycles, with success signals defined before
+                        launch, and at least one course correction (iterate or cut scope) based on
+                        post-launch evidence.
+                        5 = Consistent short-cycle shipping plus at least one deliberate stop or
+                        kill based on evidence, with capacity redirected and the reasoning
+                        communicated. Clear account of what they would do differently.
+  Acceptable evidence:  CV bullets naming shipped and stopped work and how use was judged.
+                        Portfolio. Interview detail. Strong qualitative evidence (for example, users
+                        adopting a tool unprompted) is equal to a metric. Internal tools built and
+                        shipped outside a PM title count if the candidate owned problem, release and
+                        follow-up.
+  Interview probe:      "Tell me about something you shipped that didn't get used. How did you find
+                        out, how long did it take, and what did you do next?"
+
+PM-3  Prioritization judgment and rationale  [INTERVIEW/WORK-SAMPLE ONLY]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         PM-3
+  Criterion:            Prioritization judgment and rationale
+  Expected job outcome: Can tell the founder, without hesitation, the three most important things to
+                        build next and why.
+  Basis and sources:    PMJD / "What Success Looks Like at 6 Months" / b2; PMJD / "What You'll Own"
+                        / b1, b3 ("in what order, and why") (H3). Judgment weight.
+  Weight %:             20  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: cannot produce a ranking, defers entirely to
+                        the loudest requester, or the rationale contradicts the facts given.
+                        2 = Produces a list, but the reasoning is vague ("customers want it") or
+                        rests on a single input. No trade-offs named.
+                        3 = Ranked list with reasons tied to user problems and effort. States what
+                        is deprioritized.
+                        4 = Ranks using explicit criteria (user impact, frequency, risk, effort,
+                        dependencies), states assumptions, and names what evidence would change the
+                        ranking.
+                        5 = As 4, plus sequences work so that early items reduce uncertainty for
+                        later ones, handles a conflicting request transparently, and gives a concise
+                        rationale suitable for both engineering and the founder.
+  Acceptable evidence:  Structured interview case or take-home using a Kargo-provided scenario (not
+                        the candidate's confidential employer data). Past-decision walk-through with
+                        detail. A CV claim alone gives NE.
+  Interview probe:      Work sample: "Here are eight requests from ops users, sales and engineering.
+                        Pick the top three for next quarter, explain why, and say what you are
+                        saying no to."
+
+PM-4  Engineering partnership and planning horizon  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         PM-4
+  Criterion:            Engineering partnership and planning horizon
+  Expected job outcome: Engineering knows what it is building three sprints out. Requirements are
+                        clear enough to build from without a product-ops layer.
+  Basis and sources:    PMJD / "What You'll Own" / b3; PMJD / "What Success Looks Like at 6 Months"
+                        / b3 (H4). Judgment weight.
+  Weight %:             15  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: hands over requests without problem
+                        definition, or describes an unresolved adversarial pattern with engineers.
+                        No planning beyond the current sprint.
+                        2 = Writes requirements when asked. Horizon is the current sprint. Engineers
+                        often blocked on clarifications.
+                        3 = Clear problem statements and acceptance criteria. Maintains a near-term
+                        backlog. Involves engineers in scoping.
+                        4 = Backlog is ready about 2-3 sprints ahead. Negotiates scope using
+                        technical constraints. Engineers can explain why they are building each
+                        item.
+                        5 = As 4, plus has improved how the team plans (for example introduced
+                        refinement) and uses engineering input to reshape solutions. Specific
+                        evidence that engineers relied on their calls.
+  Acceptable evidence:  Redacted spec or ticket sample. CV bullets about working with engineering.
+                        Interview detail. Experience as an engineer counts only for the partnership
+                        behavior shown, not for technical skill in itself.
+  Interview probe:      "Show us a spec or ticket you wrote (redacted). What did the engineers push
+                        back on, and what changed?"
+
+PM-5  Building lightweight working practices where none exist  [CV-OK]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         PM-5
+  Criterion:            Building lightweight working practices where none exist
+  Expected job outcome: Kargo has working rhythms for deciding priorities, tracking results and
+                        communicating decisions.
+  Basis and sources:    PMJD / "What You'll Own" / b4; PMJD / "What We're Looking For" / b2 (H5).
+                        Scope is limited to the PM's own work and team (see C1). Judgment weight.
+  Weight %:             10  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: reports being unable to work without
+                        existing templates, or imposed heavy process that was abandoned and cannot
+                        explain why.
+                        2 = Has followed and adapted existing processes. No example of creating one.
+                        3 = Created at least one working practice or tool for their team where none
+                        existed, and it was used.
+                        4 = Created several lightweight practices that others adopted, and adjusted
+                        them based on use.
+                        5 = Designed a coherent set of rhythms (prioritization, outcome tracking,
+                        decision communication) from scratch, kept them light, saw voluntary
+                        adoption, and can say what they deliberately left out.
+  Acceptable evidence:  CV evidence of process, tracker or documentation creation in any role (this
+                        is a transferable behavior). Interview detail on adoption. Shipping product
+                        features is scored under PM-2, not here.
+  Interview probe:      "Tell us about a process you set up where none existed. What did you
+                        deliberately leave out, and how did you know people were actually using it?"
+
+PM-6  Operations workflow understanding  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         PM-6
+  Criterion:            Operations workflow understanding
+  Expected job outcome: Understands how freight forwarders' operations work at ground level quickly
+                        enough to make grounded product calls.
+  Basis and sources:    PMJD / "What We're Looking For" / b4 ("Genuine curiosity"); PMJD / "About
+                        Kargo"; PMJD / "What Success Looks Like at 6 Months" / b4 (H10). This is a
+                        PREFERENCE, not an essential requirement: the JD asks for curiosity, not
+                        prior domain experience. Lower weight for that reason.
+  Weight %:             10  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: dismisses operational detail as unimportant
+                        to product work.
+                        2 = General awareness only. Cannot describe the daily workflow or failure
+                        points in any operations-heavy domain.
+                        3 = Describes the daily workflow, pressures and failure points of
+                        operational users in some operations-heavy domain from direct exposure, OR
+                        has prepared with specific, accurate questions about freight forwarding.
+                        4 = Direct working exposure to operations workflows (as a practitioner or an
+                        embedded PM). Connects them to concrete software needs.
+                        5 = Deep first-hand command of freight or 3PL-type workflows (documentation,
+                        carrier coordination, exceptions). Articulates what breaks, why, and what
+                        software can and cannot fix.
+  Acceptable evidence:  Demonstrated description of workflows in the CV or interview. An employer or
+                        industry label alone scores nothing. Distinct from PM-1: PM-1 measures how
+                        the candidate discovers; PM-6 measures what they already understand or
+                        quickly learn.
+  Interview probe:      "Describe what a freight forwarder's operations team's morning looks like.
+                        What goes wrong most often, and why?"
+
+
+4.2 PM essential requirements (status only; never added to the score)
+---------------------------------------------------------------------
++----------+--------------------------+------------------------+------------------------------------------+
+| ID       | Requirement              | Source                 | Status rule (PROPOSED RULE)              |
++==========+==========================+========================+==========================================+
+| ER-PM-A  | In-office in Mumbai;     | PMJD / header; / "What | Confirmed: Mumbai-based, or states       |
+|          | Mumbai-based or willing  | We're Looking For" /   | willingness to relocate. Unclear:        |
+|          | to relocate.             | b5; / footer (F2)      | located elsewhere with no statement (the |
+|          |                          |                        | CV location alone is NOT a mismatch).    |
+|          |                          |                        | Evidence of mismatch: candidate          |
+|          |                          |                        | explicitly states they will not relocate |
+|          |                          |                        | or work in office.                       |
++----------+--------------------------+------------------------+------------------------------------------+
+| ER-PM-B  | 2-4 years of product     | PMJD / "What We're     | Essentiality to be confirmed by the      |
+|          | management experience.   | Looking For" / b1 (F5) | founder (C3). Confirmed: 2-4 years in PM |
+|          |                          |                        | roles. Unclear: under 2 or over 4 years, |
+|          |                          |                        | or equivalent product ownership under    |
+|          |                          |                        | another title. Mark Mismatch only if the |
+|          |                          |                        | founder confirms hard bounds AND the     |
+|          |                          |                        | evidence is clearly outside them. Never  |
+|          |                          |                        | auto-exclude.                            |
++----------+--------------------------+------------------------+------------------------------------------+
+Preference, not a requirement: "ideally at a company building for the first time" (PMJD / "What
+We're Looking For" / b1). This is captured through the behaviors in PM-2 and PM-5, not through the
+employer's stage or label. It must not be used as an exclusion rule.
+
+====================================================================================================
+5. SENIOR PRODUCT MANAGER SCORECARD
+====================================================================================================
+
+All weights are PROPOSED JUDGMENT based on the emphasis in the SPMJD. They are not statistically
+validated. There is no historical basis (gap G1). The same evidence-mode labels as Section 4 apply.
+
+5.1 SPM scorecard - summary
+---------------------------
++---------+------------------------------------------------------+----------------------------+----------+
+| ID      | Criterion                                            | Evidence mode              | Weight % |
++=========+======================================================+============================+==========+
+| SPM-1   | Integration and platform product judgment            | CV-PARTIAL                 | 25       |
++---------+------------------------------------------------------+----------------------------+----------+
+| SPM-2   | Autonomous decision ownership in ambiguous, low-     | CV-PARTIAL                 | 15       |
+|         | structure settings                                   |                            |          |
++---------+------------------------------------------------------+----------------------------+----------+
+| SPM-3   | Roadmap stability and cross-functional alignment     | INTERVIEW/WORK-SAMPLE ONLY | 20       |
++---------+------------------------------------------------------+----------------------------+----------+
+| SPM-4   | Reliability and data-quality standards               | CV-PARTIAL                 | 10       |
++---------+------------------------------------------------------+----------------------------+----------+
+| SPM-5   | Commercial and customer-operations signal synthesis  | CV-PARTIAL                 | 10       |
++---------+------------------------------------------------------+----------------------------+----------+
+| SPM-6   | Operations-heavy domain and systems-landscape        | CV-PARTIAL                 | 10       |
+|         | familiarity                                          |                            |          |
++---------+------------------------------------------------------+----------------------------+----------+
+| SPM-7   | Raising PM practice standards for the function       | CV-PARTIAL                 | 10       |
++---------+------------------------------------------------------+----------------------------+----------+
+|         | TOTAL                                                |                            | 100      |
++---------+------------------------------------------------------+----------------------------+----------+
+
+5.1 SPM scorecard - full criteria (one record per table row)
+------------------------------------------------------------
+SPM-1  Integration and platform product judgment  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         SPM-1
+  Criterion:            Integration and platform product judgment
+  Expected job outcome: A defensible build / configure / not-touch point of view that the team
+                        knows. At least one major integration shipped that opened a segment or
+                        unblocked a deal. Decisions that hold up over a two-year horizon.
+  Basis and sources:    SPMJD / "What You'll Own" / b1-b2; SPMJD / "What Success Looks Like at 6
+                        Months" / b2-b3; SPMJD / "What We're Looking For" / b2; SPMJD / "Why This
+                        Role Exists" (H6). This is the highest weight because it is the role's core
+                        ownership. Judgment only.
+  Weight %:             25  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: no exposure to integration or platform
+                        decisions, and cannot reason about trade-offs (for example, treats every
+                        customer-specific request as something to build).
+                        2 = Worked on integrations as an executor (delivered to a spec) but did not
+                        make build / configure / avoid calls. Limited reasoning about long-term
+                        cost.
+                        3 = Owned at least one integration or platform area end to end. Explains one
+                        build-vs-configure decision and its consequences.
+                        4 = Owned several such decisions. Applies a consistent framework
+                        (maintenance cost, data contracts, partner reliability, configurability
+                        limits) and gives an example of declining or reversing a decision, with
+                        reasons.
+                        5 = Set integration or platform strategy for a product. Decisions held for a
+                        year or more, or were deliberately revised on evidence. Presents a
+                        defensible build / configure / avoid view for a novel Kargo-like case,
+                        including what not to touch.
+  Acceptable evidence:  CV evidence of integration or platform ownership (exposure). The quality of
+                        judgment must come from a work sample or interview. Qualitative accounts of
+                        consequences are acceptable.
+  Interview probe:      Work sample: "A large prospect needs a custom connector to their ERP. Two
+                        other customers use different ERPs. Do you build, configure or decline? What
+                        happens in two years under each option?"
+
+SPM-2  Autonomous decision ownership in ambiguous, low-structure settings  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         SPM-2
+  Criterion:            Autonomous decision ownership in ambiguous, low-structure settings
+  Expected job outcome: Makes calls without a committee, communicates the reasoning, and lives with
+                        the consequences.
+  Basis and sources:    SPMJD / "What We're Looking For" / b1 ("without a layer of senior PMs above
+                        you"), b3 ("no committee"), b4 ("rules were not written yet") (H7). Judgment
+                        weight. The early-stage employer label is not scored (Section 3.3).
+  Weight %:             15  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: consequential decisions consistently
+                        escalated or deferred, or blames others for the outcome of their own calls.
+                        2 = Decides within a framework set by senior PMs. Few examples of calls made
+                        with unclear information.
+                        3 = Made consequential calls for their own area without a senior-PM layer.
+                        Describes one that went wrong and what they did about it.
+                        4 = A repeated pattern: decides under ambiguity, states rationale and risk
+                        up front, follows up on the outcome, and owns a visible mistake.
+                        5 = As 4, in an area where rules were not yet written (new product, new
+                        function, early company). Also set decision criteria or rights for others
+                        and ran reviews of past decisions.
+  Acceptable evidence:  CV scope statements showing sole ownership. Interview accounts of specific
+                        decisions and their aftermath. Reference checks (if used, with consent).
+  Interview probe:      "Tell us about a product call you made without anyone above you approving
+                        it, which turned out wrong. When did you realize, and what did you do?"
+
+SPM-3  Roadmap stability and cross-functional alignment  [INTERVIEW/WORK-SAMPLE ONLY]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         SPM-3
+  Criterion:            Roadmap stability and cross-functional alignment
+  Expected job outcome: An integration roadmap that engineering, sales and the founder agree on and
+                        trust, and that "has not changed three times in six weeks".
+  Basis and sources:    SPMJD / "What Success Looks Like at 6 Months" / b1; SPMJD / "What You'll
+                        Own" / b4 (working across sales, engineering, customer operations) (H8).
+                        Judgment weight.
+  Weight %:             20  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: roadmap churn driven by the latest request,
+                        or stakeholders repeatedly surprised by decisions.
+                        2 = Aligned with one function (usually engineering). Other functions learn
+                        about decisions late.
+                        3 = Runs a regular cross-functional roadmap review. Describes resolving one
+                        sales-versus-engineering conflict.
+                        4 = Roadmap has explicit change criteria. Sales, engineering and ops accept
+                        the trade-offs. Shows how a major new request was absorbed without churn.
+                        5 = As 4, sustained over several quarters with senior leadership trust.
+                        Designed the intake and change process others use. Handles a founder-
+                        override scenario transparently: states the disagreement, documents it, then
+                        commits or escalates with reasons.
+  Acceptable evidence:  Structured interview scenario. Detailed past examples. References (if used).
+                        CV assertions of "alignment" alone give NE.
+  Interview probe:      "Sales says a deal depends on integration X next month. Engineering says X
+                        will destabilize Y. The founder asks for your call by Friday. Walk us
+                        through what you do."
+
+SPM-4  Reliability and data-quality standards  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         SPM-4
+  Criterion:            Reliability and data-quality standards
+  Expected job outcome: Standards for reliability and data quality that freight forwarders can stake
+                        their operations on.
+  Basis and sources:    SPMJD / "What You'll Own" / b3; SPMJD / "About Kargo" (operational
+                        dependence) (H9). Judgment weight.
+  Weight %:             10  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: treats reliability purely as engineering's
+                        problem. No awareness of data-quality failure modes.
+                        2 = Responded to incidents when pulled in. No defined standards.
+                        3 = Defined or tracked at least one reliability or data-quality measure for
+                        a product area. Took part in incident follow-up.
+                        4 = Set product-level standards (for example freshness, accuracy, error
+                        handling, customer communication) and made roadmap trade-offs to meet them.
+                        5 = As 4, across external data sources or partners. Led post-mortems with
+                        customer-facing communication and closed the follow-ups. Can say what
+                        failure is acceptable or unacceptable for operational users.
+  Acceptable evidence:  CV evidence of incident ownership, standards or SLAs. Interview walk-through
+                        of an incident.
+  Interview probe:      "Tell us about a time bad data from a partner reached your users. What
+                        standard did you set afterwards, and what did it cost you on the roadmap?"
+
+SPM-5  Commercial and customer-operations signal synthesis  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         SPM-5
+  Criterion:            Commercial and customer-operations signal synthesis
+  Expected job outcome: Knows which integrations unlock new customers and which gaps are losing
+                        them. Ships one integration that opens a segment or unblocks a deal.
+  Basis and sources:    SPMJD / "What You'll Own" / b4; SPMJD / "What Success Looks Like at 6
+                        Months" / b2. Distinct from SPM-3 (alignment process) and SPM-1
+                        (architecture judgment): this scores the quality of the commercial evidence
+                        used. Judgment weight.
+  Weight %:             10  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: dismisses sales and customer input, or
+                        builds every integration a deal requests without qualification.
+                        2 = Takes sales input at face value. Does not qualify deal claims.
+                        3 = Qualifies integration requests with sales and customer ops (deal size,
+                        segment, frequency). Describes one integration tied to a commercial outcome.
+                        4 = Systematically tracks lost or stalled deals and churn reasons against
+                        integration gaps, and prioritizes on that basis.
+                        5 = As 4, plus spotted a segment-level opportunity across deals or
+                        customers, delivered an integration that opened it, and declined a loud deal
+                        request with reasons that held up.
+  Acceptable evidence:  CV links between product work and commercial outcomes (quantified or clearly
+                        described). Interview detail.
+  Interview probe:      "How did you decide which integrations were worth building for sales? Give
+                        an example of one you refused."
+
+SPM-6  Operations-heavy domain and systems-landscape familiarity  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         SPM-6
+  Criterion:            Operations-heavy domain and systems-landscape familiarity
+  Expected job outcome: Anticipates how carrier systems, port portals, ERPs and freight tools behave
+                        in customers' daily operations.
+  Basis and sources:    SPMJD / "What We're Looking For" / b5 ("genuine advantage, not a nice-to-
+                        have"); SPMJD / "What You'll Own" / b1 (H10). This is a WEIGHTED ADVANTAGE,
+                        not an essential requirement (C4). The SPM expectation extends PM-6 to the
+                        systems landscape.
+  Weight %:             10  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: dismisses operational or system-landscape
+                        detail as irrelevant.
+                        2 = General awareness only.
+                        3 = Direct exposure to an operations-heavy domain (logistics, supply chain
+                        or adjacent) with concrete workflow knowledge.
+                        4 = Direct exposure to the logistics or supply-chain systems landscape (for
+                        example TMS or FMS, carrier or port data exchange, ERP). Can describe how
+                        data moves between systems and where it fails.
+                        5 = Deep first-hand command of how freight forwarders' systems and
+                        counterparties interact. Anticipates integration failure modes and their
+                        operational consequences.
+  Acceptable evidence:  Demonstrated description in the CV or interview. A domain or employer label
+                        alone scores nothing. Adjacent domains can reach 3-4.
+  Interview probe:      "Trace a shipment status update from a carrier to a forwarder's customer.
+                        Where does the data break, and who notices first?"
+
+SPM-7  Raising PM practice standards for the function  [CV-PARTIAL]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Criterion ID:         SPM-7
+  Criterion:            Raising PM practice standards for the function
+  Expected job outcome: Kargo's PM function has clearer standards for good PM work because the SPM
+                        demonstrated them.
+  Basis and sources:    SPMJD / "What You'll Own" / b5; SPMJD / "What Success Looks Like at 6
+                        Months" / b4; SPMJD / "Why This Role Exists" (H5). Distinct from PM-5 (own-
+                        team rhythms); see C1. Judgment weight.
+  Weight %:             10  (PROPOSED JUDGMENT; not statistically validated)
+  Score anchors 1-5:    1 = Explicit negative evidence: dismisses documentation or standards, or
+                        relies on authority instead of example.
+                        2 = Follows good practice personally. No evidence of influencing others.
+                        3 = Created at least one practice, template or framework that other PMs
+                        adopted, or mentored a PM or APM.
+                        4 = Shaped several practices (decision frameworks, discovery standards,
+                        review rituals) adopted across a team. Coached others with visible
+                        improvement.
+                        5 = Built or rebuilt a PM function's working norms from an unstructured
+                        state, kept them light, can show how quality improved, and demonstrated the
+                        standards in their own work first.
+  Acceptable evidence:  CV evidence of frameworks adopted by others, mentoring or coaching.
+                        Interview examples. Mentoring engineers or analysts counts toward 3 only if
+                        it concerned product practice.
+  Interview probe:      "What does good PM work look like to you, and how did you get other PMs to
+                        work that way without mandating it?"
+
+
+5.2 SPM essential requirements (status only; never added to the score)
+----------------------------------------------------------------------
++-----------+---------------------------+------------------------+----------------------------------------+
+| ID        | Requirement               | Source                 | Status rule (PROPOSED RULE)            |
++===========+===========================+========================+========================================+
+| ER-SPM-A  | In-office in Mumbai;      | SPMJD / header; /      | Same rule as ER-PM-A.                  |
+|           | Mumbai-based or willing   | "What We're Looking    |                                        |
+|           | to relocate.              | For" / b6; / footer    |                                        |
+|           |                           | (F2)                   |                                        |
++-----------+---------------------------+------------------------+----------------------------------------+
+| ER-SPM-B  | 5-8 years of PM           | SPMJD / "What We're    | Essentiality of the year range to be   |
+|           | experience, with evidence | Looking For" / b1 (F8) | confirmed (C3). Unclear if outside 5-8 |
+|           | of owning a product area  |                        | years or if the title is not PM.       |
+|           | without a layer of senior |                        | Ownership quality is scored in SPM-2;  |
+|           | PMs making the calls.     |                        | this row only records whether the      |
+|           |                           |                        | evidence exists. Never auto-exclude.   |
++-----------+---------------------------+------------------------+----------------------------------------+
+| ER-SPM-C  | Experience with platform  | SPMJD / "What We're    | Essentiality to be confirmed.          |
+|           | products, integration     | Looking For" / b2 (F8) | Confirmed if any such experience is    |
+|           | layers, or products       |                        | evidenced. Unclear if not visible.     |
+|           | working inside complex    |                        | Mismatch only on explicit contrary     |
+|           | existing technical        |                        | evidence. Quality is scored in SPM-1;  |
+|           | environments.             |                        | this row records presence only, so the |
+|           |                           |                        | behavior is not double-counted.        |
++-----------+---------------------------+------------------------+----------------------------------------+
+Weighted advantages, not requirements: early-stage experience, or equivalent evidence (captured
+through the behavior in SPM-2), and operations-domain familiarity (SPM-6). Neither may be turned
+into an exclusion rule.
+
+5.3 How PM and SPM expectations differ (INFERENCE from the cited JD passages)
+-----------------------------------------------------------------------------
++----------------+---------------------------+-----------------------------+------------------------------+
+| Dimension      | Product Manager           | Senior Product Manager      | Sources                      |
++================+===========================+=============================+==============================+
+| Scope          | Core operations platform  | Integration and data layer; | PMJD / "What You'll Own" /   |
+|                | features (tracking,       | architectural calls with    | b1; SPMJD / "What You'll     |
+|                | documentation, status).   | 2-year consequences.        | Own" / b1-b2; SPMJD / "Why   |
+|                |                           |                             | This Role Exists"            |
++----------------+---------------------------+-----------------------------+------------------------------+
+| Autonomy       | Owns own area with direct | Makes consequential calls   | PMJD / "What Kargo Offers" / |
+|                | founder access. Builds    | with no committee or        | b1; SPMJD / "What We're      |
+|                | own rhythms.              | senior-PM layer. Most       | Looking For" / b1, b3        |
+|                |                           | senior PM.                  |                              |
++----------------+---------------------------+-----------------------------+------------------------------+
+| Prioritization | Next three builds; three- | Integration roadmap that    | PMJD / "What Success Looks   |
+|                | sprint engineering        | stays stable across a       | Like at 6 Months" / b2-b3;   |
+|                | horizon.                  | 6-week window; build /      | SPMJD / "What Success Looks  |
+|                |                           | configure / not-touch       | Like at 6 Months" / b1, b3   |
+|                |                           | policy.                     |                              |
++----------------+---------------------------+-----------------------------+------------------------------+
+| Stakeholders   | Engineering, customers'   | Sales, engineering,         | PMJD / "What You'll Own" /   |
+|                | ops users, founder.       | customer operations,        | b2-b3; SPMJD / "What You'll  |
+|                |                           | founder; commercial trade-  | Own" / b4                    |
+|                |                           | offs.                       |                              |
++----------------+---------------------------+-----------------------------+------------------------------+
+| Leadership     | Rhythms for own work and  | Standards for the PM        | PMJD / "What You'll Own" /   |
+|                | team (PM-5).              | function; possible path to  | b4; SPMJD / "What You'll     |
+|                |                           | Head of Product (SPM-7).    | Own" / b5; SPMJD / "What     |
+|                |                           |                             | Kargo Offers" / b1           |
++----------------+---------------------------+-----------------------------+------------------------------+
+| Domain         | Curiosity; preference     | Genuine advantage; includes | PMJD / "What We're Looking   |
+|                | (PM-6, 10%).              | systems landscape (SPM-6,   | For" / b4; SPMJD / "What     |
+|                |                           | 10%).                       | We're Looking For" / b5      |
++----------------+---------------------------+-----------------------------+------------------------------+
+
+====================================================================================================
+6. SCORING, COVERAGE, AND REVIEW RULES
+====================================================================================================
+
+Every rule in this section is a PROPOSED RULE. All are configurable operational conventions that
+need calibration. None is a validated finding.
+
+6.1 Scoring each criterion
+--------------------------
+  - Each criterion has a weight w (Sections 4-5). It receives a score s from 1 to 5 only when there
+    is sufficient relevant evidence to match an anchor. Otherwise it is marked NE (Not Enough
+    Evidence).
+  - Missing evidence never receives 0, 1 or an assumed average. Absence of evidence is recorded as
+    NE.
+  - A low score (1-2) requires explicit negative evidence, meaning something the candidate said,
+    wrote or did that matches the low anchor. Silence on a topic is NE, not 1.
+  - [INTERVIEW/WORK-SAMPLE ONLY] criteria (PM-3, SPM-3) must be NE at CV-screen stage.
+  - [CV-PARTIAL] criteria may be scored from a CV only on specific behavioral evidence. Candidate-
+    evidence confidence is capped at Medium and the criterion must be re-scored after interview.
+  - CV statements are claims. Treat them as evidence of what the candidate reports, and verify
+    material claims in interview.
+  - Score the evidence once, under the single criterion it best fits (the criterion notes explain
+    boundaries). Do not re-use one achievement to lift several criteria unless it genuinely shows
+    different behaviors, and note why.
+
+6.2 Formulas
+------------
+  Evidence coverage (%)          = sum of w over scored criteria
+  Provisional evidence score     = 100 x sum[ w x (s - 1) / 4 ]  /  sum[ w for scored criteria ]
+  If no criterion is scored      -> "Not scorable"
+  Display (always both):          "Score XX.X/100 at YY% coverage (stage: <stage>)"
+
+Worked example using hypothetical numbers only, not a candidate. PM-1 s=4 (w20), PM-2 s=3 (w25),
+PM-3 NE, PM-4 s=5 (w15), PM-5 NE, PM-6 s=2 (w10). Coverage = 20+25+15+10 = 70%. Score = 100 x
+(20x0.75 + 25x0.50 + 15x1.00 + 10x0.25) / 70 = 100 x 45 / 70 = 64.3. Display: "Score 64.3/100 at 70%
+coverage (stage: CV screen)".
+
+6.3 Interpretation limits
+-------------------------
+  - The score is not a probability of success, and it has no historical validation (gap G1).
+  - Coverage below 70% (a provisional minimum): do not interpret the total score. Recommend
+    collecting more evidence or human review. The 70% level is an operational convention and must be
+    calibrated. For reference, the maximum CV-stage coverage is 80% for PM (PM-3 is interview-only)
+    and 80% for SPM (SPM-3 is interview-only).
+  - Do not rank candidates directly against each other if they are at different assessment stages,
+    or if their coverage differs by more than 15 percentage points (a configurable convention).
+  - There are no automatic accept or reject thresholds. Before any score bands are used
+    operationally, the founder or a delegated human reviewer should review the bands against worked
+    examples.
+  - Round the score to one decimal place. Differences of a few points are within the noise of
+    subjective anchoring and should not decide outcomes.
+
+6.4 Essential requirements
+--------------------------
++----------------------+-----------------------------------------------+--------------------------------+
+| Status               | Meaning                                       | Action                         |
++======================+===============================================+================================+
+| Confirmed            | Evidence clearly satisfies the requirement.   | None.                          |
++----------------------+-----------------------------------------------+--------------------------------+
+| Unclear              | Evidence absent, ambiguous, or outside a      | Flag for verification          |
+|                      | range whose essentiality is unconfirmed.      | (question, or founder          |
+|                      |                                               | clarification). Not a          |
+|                      |                                               | rejection.                     |
++----------------------+-----------------------------------------------+--------------------------------+
+| Evidence of mismatch | Explicit evidence contradicts a requirement   | Route to human review with the |
+|                      | the founder has confirmed as essential.       | evidence cited. The system     |
+|                      |                                               | does not reject.               |
++----------------------+-----------------------------------------------+--------------------------------+
+
+6.5 Two separate confidence ratings
+-----------------------------------
++------------------------------------+------------------------+----------------------------------------+
+| Rating                             | Levels                 | Current value / definition             |
++====================================+========================+========================================+
+| Pattern confidence (is the         | Not established / Weak | NOT ESTABLISHED for every criterion (0 |
+| criterion historically associated  | / Moderate / Strong    | historical cases). Upgrade only after  |
+| with success at Kargo?)            |                        | hires/ analysis, and even then treat   |
+|                                    |                        | small samples as hypotheses.           |
++------------------------------------+------------------------+----------------------------------------+
+| Candidate-evidence confidence (how | Low / Medium / High    | Low = brief, generic or single         |
+| reliable is this candidate's       |                        | unverified claim. Medium = specific,   |
+| evidence for this criterion?)      |                        | detailed claim from one source, or a   |
+|                                    |                        | CV claim consistent with interview.    |
+|                                    |                        | High = verified by a work sample or    |
+|                                    |                        | multiple consistent, specific sources  |
+|                                    |                        | including interview.                   |
++------------------------------------+------------------------+----------------------------------------+
+
+6.6 Recommendation vocabulary (system output) and decision authority
+--------------------------------------------------------------------
++--------------------------------------+------------------------------------------------------------+
+| Recommended next step                | Use when                                                   |
++======================================+============================================================+
+| Collect more evidence                | Coverage is below 70%, or key criteria are NE.             |
++--------------------------------------+------------------------------------------------------------+
+| Human review: advance to next stage  | Coverage is at least 70%, the score and evidence look      |
+|                                      | role-relevant, and no essential requirement is a mismatch. |
+|                                      | This is a suggestion for the founder.                      |
++--------------------------------------+------------------------------------------------------------+
+| Human review: contradictions         | Evidence conflicts across sources or stages.               |
++--------------------------------------+------------------------------------------------------------+
+| Hold: verify essential requirement   | Any essential requirement is Unclear or Evidence of        |
+|                                      | mismatch.                                                  |
++--------------------------------------+------------------------------------------------------------+
+The system recommends; the founder decides. No recommendation authorizes contacting, advancing or
+declining a candidate. Founder decisions are recorded separately (Section 7).
+
+====================================================================================================
+7. REUSABLE CANDIDATE EVALUATION TEMPLATE
+====================================================================================================
+
+Copy one block per candidate. Leave fields blank until evidence exists. Use NE for any criterion
+without sufficient evidence.
+
+---------------------------------------- BEGIN TEMPLATE ----------------------------------------
+
+A. CANDIDATE
++-----------------------------------------------+--------------------------------------------------+
+| Field                                         | Value                                            |
++===============================================+==================================================+
+| Candidate ID/name                             |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Target role (PM / SPM)                        |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Assessment stage (CV screen / Screening call  |                                                  |
+| / Structured interview / Work sample /        |                                                  |
+| References)                                   |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Source files (filename + section for each)    |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Evaluator and date                            |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+
+B. CRITERION SCORES  (use the PM or SPM criteria list for the target role)
++---------------+--------+--------------------------+---------+------------------------+------------+
+| Criterion     | Weight | Evidence and source      | Score   | Reason                 | Confidence |
+|               |        |                          | or NE   |                        | (L/M/H)    |
++===============+========+==========================+=========+========================+============+
+| PM-1 / SPM-1  |        |                          |         |                        |            |
++---------------+--------+--------------------------+---------+------------------------+------------+
+| PM-2 / SPM-2  |        |                          |         |                        |            |
++---------------+--------+--------------------------+---------+------------------------+------------+
+| PM-3 / SPM-3  |        |                          |         |                        |            |
++---------------+--------+--------------------------+---------+------------------------+------------+
+| PM-4 / SPM-4  |        |                          |         |                        |            |
++---------------+--------+--------------------------+---------+------------------------+------------+
+| PM-5 / SPM-5  |        |                          |         |                        |            |
++---------------+--------+--------------------------+---------+------------------------+------------+
+| PM-6 / SPM-6  |        |                          |         |                        |            |
++---------------+--------+--------------------------+---------+------------------------+------------+
+| (SPM-7)       |        |                          |         |                        |            |
++---------------+--------+--------------------------+---------+------------------------+------------+
+
+C. SUMMARY
++-----------------------------------------------+--------------------------------------------------+
+| Field                                         | Value                                            |
++===============================================+==================================================+
+| Provisional score (/100)                      |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Evidence coverage (%)                         |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Essential requirements status (each:          | ER-_-A:        ER-_-B:        ER-SPM-C:          |
+| Confirmed / Unclear / Evidence of mismatch)   |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Pattern confidence                            | Not established (see 6.5), unless updated after  |
+|                                               | hires/ analysis                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Strongest role-relevant evidence              |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Missing or contradictory evidence             |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Recommended next step and explanation (6.6    |                                                  |
+| vocabulary)                                   |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+
+D. THREE TARGETED INTERVIEW QUESTIONS (each tied to an NE or low-confidence criterion)
+  1. [Criterion ID]  ______________________________________________
+  2. [Criterion ID]  ______________________________________________
+  3. [Criterion ID]  ______________________________________________
+
+E. FOUNDER DECISION  (completed only by the founder; separate from the recommendation above)
++-----------------------------------------------+--------------------------------------------------+
+| Field                                         | Value                                            |
++===============================================+==================================================+
+| Founder decision: Pending / Advance / Hold /  | Pending                                          |
+| Decline                                       |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Founder rationale                             |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+| Decision date                                 |                                                  |
++-----------------------------------------------+--------------------------------------------------+
+Note: a recommendation in Section C does not authorize contacting the candidate. Contact happens
+only after the founder records a decision in Section E.
+
+----------------------------------------- END TEMPLATE -----------------------------------------
+
+====================================================================================================
+8. CALIBRATION AND QUALITY CHECK
+====================================================================================================
+
+
+8.1 Checklist
+-------------
++------------------------------------+------------------+----------------------------------------------+
+| Check                              | Result           | Note                                         |
++====================================+==================+==============================================+
+| PM scorecard weights total 100%    | PASS             | Sum = 100 (20+25+20+15+10+10)                |
++------------------------------------+------------------+----------------------------------------------+
+| SPM scorecard weights total 100%   | PASS             | Sum = 100 (25+15+20+10+10+10+10)             |
++------------------------------------+------------------+----------------------------------------------+
+| All criteria have anchors 1-5      | PASS             | 6 PM + 7 SPM criteria x 5 anchors each       |
++------------------------------------+------------------+----------------------------------------------+
+| Historical claims have source      | PASS (vacuous)   | No historical claims are made (G1). All JD   |
+| references                         |                  | claims carry locators.                       |
++------------------------------------+------------------+----------------------------------------------+
+| Counterexamples and uncertainty    | PARTIAL          | Counterexamples cannot be tested without     |
+| visible                            |                  | hires/. Uncertainty is stated in the         |
+|                                    |                  | PROVISIONAL banner, Section 3 and 6.5.       |
++------------------------------------+------------------+----------------------------------------------+
+| Missing evidence not treated as    | PASS             | NE rule; a low score requires explicit       |
+| failure                            |                  | negative evidence (6.1).                     |
++------------------------------------+------------------+----------------------------------------------+
+| No duplicated criteria             | PASS with notes  | Boundary notes: PM-1 vs PM-6; PM-5 vs SPM-7; |
+|                                    |                  | SPM-1 vs SPM-3 vs SPM-5; ER-SPM-C vs SPM-1   |
+|                                    |                  | (presence vs quality).                       |
++------------------------------------+------------------+----------------------------------------------+
+| No reliance on irrelevant personal | PASS             | Section 3.3 exclusions. Years are status-    |
+| characteristics                    |                  | only and never auto-exclude.                 |
++------------------------------------+------------------+----------------------------------------------+
+| PM and SPM expectations differ     | PASS             | Section 5.3.                                 |
+| meaningfully                       |                  |                                              |
++------------------------------------+------------------+----------------------------------------------+
+| Interview-only criteria labelled   | PASS             | PM-3, SPM-3                                  |
++------------------------------------+------------------+----------------------------------------------+
+| Weights labelled as judgment       | PASS             | Sections 4 and 5, each criterion record.     |
++------------------------------------+------------------+----------------------------------------------+
+
+8.2 Retrospective consistency check
+-----------------------------------
+NOT PERFORMED, because there is no historical hire data (G1). When hires/ is available, the check
+should work as follows. Score each past hire using only the evidence that existed at each stage:
+application-time material for the CV stage, and interview records for the interview stage. Never use
+facts learned after hiring. Compare the resulting scores with the Section 2.2 outcome categories,
+within role where possible. Report agreements and disagreements, including counterexamples. Label
+the result a retrospective consistency check. It is not independent validation: the same small
+sample would inform and test the rubric.
+
+8.3 Five most consequential questions for the founder
+-----------------------------------------------------
+  Q1. Can you supply the historical hire records (application materials as submitted, interview
+      notes, performance ratings with the rating scale, and explicitly stated employment status)?
+      And how do you define a successful hire at Kargo? This unblocks Sections 2-3 and every weight
+      (G1, G3).
+  Q2. Are the experience ranges (PM 2-4 years, SPM 5-8 years) hard requirements or scope indicators?
+      Does product ownership under a non-PM title count? Would exceeding the upper bound ever
+      disqualify someone? (C3; this has fairness implications.)
+  Q3. If both roles are filled, who owns the PM function's practices, and what is the relationship
+      between the PM and the SPM? Both JDs currently claim the function-building work (C1, C2).
+  Q4. How much should operations-domain familiarity count for each role? Is it learnable on the job
+      (PM-6 and SPM-6 are currently 10% each), or closer to a requirement for the SPM (C4)?
+  Q5. Do the proposed weights match your priorities? In particular: PM-2 (shipping and stopping) at
+      25%, SPM-1 (integration judgment) at 25%, and the 70% coverage minimum. Which 6-month success
+      outcome matters most if trade-offs are needed?
+
+END OF RUBIX.TXT
